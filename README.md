@@ -29,4 +29,4 @@ https://docs.google.com/document/d/1CVNF1YGU3ab3buEGqeYLamaCSP-kYs0ebWv76HE6Xsw/
 
 
 ##  Sobre o Projeto
-O projeto Applausos propõe o desenvolvimento de um sistema de gestão integrada para teatros, abordando a ausência de uma plataforma unificada que facilite a administração desses espaços culturais. A iniciativa visa centralizar e otimizar processos como agendamento de espetáculos, venda de ingressos, controle financeiro, manutenção de instalações e comunicação com o público. Ao implementar o Applausos, espera-se aprimorar a eficiência operacional dos teatros, proporcionando uma experiência mais organizada para gestores, artistas e espectadores.
+O projeto Applausos propõe o desenvolvimento de um sistema de gestão integrada para teatros, abordando a ausência de uma plataforma unificada que facilite a administração desses espaços culturais. A iniciativa visa centralizar e otimizar processos como agendamento de espetáculos, venda de ingressos e comunicação com o elenco e público. Ao implementar o Applausos, espera-se aprimorar a eficiência operacional dos teatros, proporcionando uma experiência mais organizada para gestores, diretores, artistas e espectadores.
