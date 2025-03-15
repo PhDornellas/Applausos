@@ -17,12 +17,14 @@
  *CESAR School*
 
 ##  Links
+
+##  Jira
 https://applausos.atlassian.net/jira/software/projects/APO/boards/1?atlOrigin=eyJpIjoiMmViOTUzOTY4ZmFhNDY2OTlhZjEyYzQ1NjBlZjM1ZTYiLCJwIjoiaiJ9
 
-
+##  Google Sites
 https://sites.google.com/cesar.school/applausos/p%C3%A1gina-inicial
 
-
+##  User Stories
 https://docs.google.com/document/d/1CVNF1YGU3ab3buEGqeYLamaCSP-kYs0ebWv76HE6Xsw/edit?usp=sharing
 
 
