@@ -24,7 +24,6 @@
 # ENTREGA 1
   ##  User Stories (Entrega 1)
   https://docs.google.com/document/d/1CVNF1YGU3ab3buEGqeYLamaCSP-kYs0ebWv76HE6Xsw/edit?usp=sharing
-
   ## ScreenCast (Entrega 1)
   https://youtu.be/QYjubRfZDB4
 
