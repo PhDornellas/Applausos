@@ -1,5 +1,3 @@
-
-
 # Applausos
 
 ## Integrantes do projeto
@@ -17,12 +15,10 @@
  *CESAR School*
 
 ##  Links
-
-##  Link Jira
-https://applausos.atlassian.net/jira/software/projects/APO/boards/1?atlOrigin=eyJpIjoiMmViOTUzOTY4ZmFhNDY2OTlhZjEyYzQ1NjBlZjM1ZTYiLCJwIjoiaiJ9
-
-##  Google Sites
-https://sites.google.com/cesar.school/applausos/p%C3%A1gina-inicial
+  ###  Link Jira
+  https://applausos.atlassian.net/jira/software/projects/APO/boards/1?atlOrigin=eyJpIjoiMmViOTUzOTY4ZmFhNDY2OTlhZjEyYzQ1NjBlZjM1ZTYiLCJwIjoiaiJ9
+  ###  Google Sites
+  https://sites.google.com/cesar.school/applausos/p%C3%A1gina-inicial
 
 
 # ENTREGA 1
