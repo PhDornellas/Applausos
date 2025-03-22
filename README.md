@@ -30,7 +30,7 @@
 
 
 
-# ENTREGA 2 
+# ENTREGA 2 (Projetos 3)
 
 Diagrama de Entidades (Entrega 2)
 
