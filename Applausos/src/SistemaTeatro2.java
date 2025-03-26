@@ -78,6 +78,7 @@ public class SistemaTeatro2 {
 
         do {
             System.out.println("\n===== Applausos =====");
+            System.out.println("\n===== faça sua escolha =====");
             System.out.println("1. Cadastro");
             System.out.println("2. Login");
             System.out.println("3. Listar Usuários");
