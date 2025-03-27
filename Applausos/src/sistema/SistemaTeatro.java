@@ -1,78 +1,14 @@
+package sistema;
+
+import usuario.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-enum UserType {
-    CLIENTE,
-    ADMINISTRADOR_PECA,
-    ADMINISTRADOR_SITE
-}
-
-abstract class User {
-    protected String nome;
-    protected String email;
-    protected String telefone;
-    protected String cpf;
-    protected String senha;
-    protected UserType tipo;
-
-    public User(String nome, String email, String telefone, String cpf, String senha, UserType tipo) {
-        this.nome = nome;
-        this.email = email;
-        this.telefone = telefone;
-        this.cpf = cpf;
-        this.senha = senha;
-        this.tipo = tipo;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public UserType getTipo() {
-        return tipo;
-    }
-}
-
-class Cliente extends User {
-    public Cliente(String nome, String email, String telefone, String cpf, String senha) {
-        super(nome, email, telefone, cpf, senha, UserType.CLIENTE);
-    }
-}
-
-class AdministradorPeca extends User {
-    public AdministradorPeca(String nome, String email, String telefone, String cpf, String senha) {
-        super(nome, email, telefone, cpf, senha, UserType.ADMINISTRADOR_PECA);
-    }
-}
-
-class AdministradorSite extends User {
-    public AdministradorSite(String nome, String email, String telefone, String cpf, String senha) {
-        super(nome, email, telefone, cpf, senha, UserType.ADMINISTRADOR_SITE);
-    }
-}
-
-public class SistemaTeatro2 {
-
+public class SistemaTeatro {
     private static List<User> usuarios = new ArrayList<>();
 
-    public static void main(String[] args) {
+    public static void executar() {
         Scanner entrada = new Scanner(System.in);
         int opcao;
 
@@ -86,20 +22,11 @@ public class SistemaTeatro2 {
             opcao = lerInteiro(entrada);
 
             switch (opcao) {
-                case 1:
-                    cadastrarUsuario(entrada);
-                    break;
-                case 2:
-                    fazerLogin(entrada);
-                    break;
-                case 3:
-                    listarUsuarios();
-                    break;
-                case 4:
-                    System.out.println("Encerrando o sistema.");
-                    break;
-                default:
-                    System.out.println("Opção inválida. Tente novamente.");
+                case 1 -> cadastrarUsuario(entrada);
+                case 2 -> fazerLogin(entrada);
+                case 3 -> listarUsuarios();
+                case 4 -> System.out.println("Encerrando o sistema.");
+                default -> System.out.println("Opção inválida. Tente novamente.");
             }
         } while (opcao != 4);
 
@@ -135,26 +62,21 @@ public class SistemaTeatro2 {
         System.out.print("Opção: ");
         int tipoOpcao = lerInteiro(scanner);
 
-        User novoUsuario = null;
-        switch (tipoOpcao) {
-            case 1:
-                novoUsuario = new Cliente(nome, email, telefone, cpf, senha);
-                break;
-            case 2:
-                novoUsuario = new AdministradorPeca(nome, email, telefone, cpf, senha);
-                break;
-            case 3:
-                novoUsuario = new AdministradorSite(nome, email, telefone, cpf, senha);
-                break;
-            default:
+        User novoUsuario = switch (tipoOpcao) {
+            case 1 -> new Cliente(nome, email, telefone, cpf, senha);
+            case 2 -> new AdministradorPeca(nome, email, telefone, cpf, senha);
+            case 3 -> new AdministradorSite(nome, email, telefone, cpf, senha);
+            default -> {
                 System.out.println("Opção inválida. Cadastro cancelado.");
-                return;
+                yield null;
+            }
+        };
+
+        if (novoUsuario != null) {
+            usuarios.add(novoUsuario);
+            System.out.println("\nCadastro realizado com sucesso!");
+            System.out.println("Bem-vindo, " + nome + " (" + novoUsuario.getTipo() + ")!");
         }
-
-        usuarios.add(novoUsuario);
-
-        System.out.println("\nCadastro realizado com sucesso!");
-        System.out.println("Bem-vindo, " + nome + " (" + novoUsuario.getTipo() + ")!");
     }
 
     private static void fazerLogin(Scanner scanner) {
@@ -192,12 +114,7 @@ public class SistemaTeatro2 {
     }
 
     private static User buscarUsuarioPorCpf(String cpf) {
-        for (User u : usuarios) {
-            if (u.getCpf().equalsIgnoreCase(cpf)) {
-                return u;
-            }
-        }
-        return null;
+        return usuarios.stream().filter(u -> u.getCpf().equalsIgnoreCase(cpf)).findFirst().orElse(null);
     }
 
     private static int lerInteiro(Scanner scanner) {
