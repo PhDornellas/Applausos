@@ -73,25 +73,24 @@ public class SistemaTeatro2 {
     private static List<User> usuarios = new ArrayList<>();
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner entrada = new Scanner(System.in);
         int opcao;
 
         do {
             System.out.println("\n===== Applausos =====");
-            System.out.println("\n===== faça sua escolha =====");
             System.out.println("1. Cadastro");
             System.out.println("2. Login");
             System.out.println("3. Listar Usuários");
             System.out.println("4. Sair");
             System.out.print("Escolha uma opção: ");
-            opcao = lerInteiro(scanner);
+            opcao = lerInteiro(entrada);
 
             switch (opcao) {
                 case 1:
-                    cadastrarUsuario(scanner);
+                    cadastrarUsuario(entrada);
                     break;
                 case 2:
-                    fazerLogin(scanner);
+                    fazerLogin(entrada);
                     break;
                 case 3:
                     listarUsuarios();
@@ -104,7 +103,7 @@ public class SistemaTeatro2 {
             }
         } while (opcao != 4);
 
-        scanner.close();
+        entrada.close();
     }
 
     private static void cadastrarUsuario(Scanner scanner) {
