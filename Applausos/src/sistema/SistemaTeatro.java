@@ -102,7 +102,7 @@ public class SistemaTeatro {
         System.out.println("Bem-vindo, " + usuario.getNome() + " (" + usuario.getTipo() + ")!");
 
         if (usuario instanceof AdministradorPeca ) {
-            SistemaAdmSite.opcaoAdmPeca();
+            AdmSite.opcaoAdmPeca();
         }
     }
 
