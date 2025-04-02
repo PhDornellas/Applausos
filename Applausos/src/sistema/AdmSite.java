@@ -87,7 +87,7 @@ public class AdmSite {
             for (int i = 0; i < indice; i++) {
                 System.out.println("Peça " + (i + 1) + ": " + listaPeca[i].getNome() 
                     + ", Data: " + listaPeca[i].getDataFormatada() 
-                    + ", Valor: R$ " + listaPeca[i].getValor() 
+                    + ", Valor: R$ " + listaPeca[i].getValor()
                     + ", Local: " + listaPeca[i].getLocal());
             }
         }
@@ -118,6 +118,7 @@ public class AdmSite {
             listaPeca[posicao].setNome(novoNome);
         }
         
+        // Editar data
         System.out.print("Novo dia (atual: " + listaPeca[posicao].getData().getDayOfMonth() + "): ");
         int novoDia = ENTRADA.nextInt();
         System.out.print("Novo mês (atual: " + listaPeca[posicao].getData().getMonthValue() + "): ");
@@ -164,5 +165,13 @@ public class AdmSite {
         indice--;
         
         System.out.println("Peça deletada com sucesso!");
+    }
+    
+    public static InfoPeca[] getListaPeca(){
+        return listaPeca;
+    }
+    
+    public static int getTotalPecas(){
+        return indice;
     }
 }

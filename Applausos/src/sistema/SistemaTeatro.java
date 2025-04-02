@@ -37,31 +37,32 @@ public class SistemaTeatro {
         System.out.println("\n===== Cadastro de Usuário =====");
         System.out.print("Nome: ");
         String nome = scanner.nextLine();
-
+    
         System.out.print("E-mail: ");
         String email = scanner.nextLine();
-
+    
         System.out.print("Telefone: ");
         String telefone = scanner.nextLine();
-
+    
         System.out.print("CPF: ");
         String cpf = scanner.nextLine();
-
+    
         if (buscarUsuarioPorCpf(cpf) != null) {
             System.out.println("Já existe um usuário com este CPF.");
             return;
         }
-
+    
         System.out.print("Senha: ");
         String senha = scanner.nextLine();
-
+    
         System.out.println("\nSelecione o tipo de usuário:");
         System.out.println("1. Cliente");
         System.out.println("2. Administrador de Peça");
         System.out.println("3. Administrador do Site");
+        System.out.println("4. Membro de Elenco");
         System.out.print("Opção: ");
         int tipoOpcao = lerInteiro(scanner);
-
+    
         User novoUsuario = switch (tipoOpcao) {
             case 1 -> new Cliente(nome, email, telefone, cpf, senha);
             case 2 -> new AdministradorPeca(nome, email, telefone, cpf, senha);
@@ -71,13 +72,14 @@ public class SistemaTeatro {
                 yield null;
             }
         };
-
+    
         if (novoUsuario != null) {
             usuarios.add(novoUsuario);
             System.out.println("\nCadastro realizado com sucesso!");
             System.out.println("Bem-vindo, " + nome + " (" + novoUsuario.getTipo() + ")!");
         }
     }
+    
 
     private static void fazerLogin(Scanner scanner) {
         System.out.println("\n===== Login =====");
@@ -103,6 +105,9 @@ public class SistemaTeatro {
 
         if (usuario instanceof AdministradorPeca ) {
             AdmSite.opcaoAdmPeca();
+        }
+        else if (usuario instanceof Cliente) {
+            clientef.opcaoCliente();
         }
     }
 
