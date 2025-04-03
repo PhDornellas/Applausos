@@ -118,7 +118,7 @@ public class AdmSite {
             listaPeca[posicao].setNome(novoNome);
         }
         
-        // Editar data
+        
         System.out.print("Novo dia (atual: " + listaPeca[posicao].getData().getDayOfMonth() + "): ");
         int novoDia = ENTRADA.nextInt();
         System.out.print("Novo mês (atual: " + listaPeca[posicao].getData().getMonthValue() + "): ");

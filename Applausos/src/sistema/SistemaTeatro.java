@@ -67,6 +67,7 @@ public class SistemaTeatro {
             case 1 -> new Cliente(nome, email, telefone, cpf, senha);
             case 2 -> new AdministradorPeca(nome, email, telefone, cpf, senha);
             case 3 -> new AdministradorSite(nome, email, telefone, cpf, senha);
+            case 4 -> new MembroElenco(nome, email, telefone, cpf, senha);
             default -> {
                 System.out.println("Opção inválida. Cadastro cancelado.");
                 yield null;
@@ -108,6 +109,10 @@ public class SistemaTeatro {
         }
         else if (usuario instanceof Cliente) {
             clientef.opcaoCliente();
+        }
+
+        if (usuario instanceof MembroElenco ) {
+            Membro.opcaoCliente();
         }
     }
 
