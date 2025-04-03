@@ -111,9 +111,6 @@ public class SistemaTeatro {
             clientef.opcaoCliente();
         }
 
-        if (usuario instanceof MembroElenco ) {
-            Membro.opcaoCliente();
-        }
     }
 
     private static void listarUsuarios() {
