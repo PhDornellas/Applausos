@@ -104,8 +104,8 @@ public class SistemaTeatro {
         System.out.println("\nLogin realizado com sucesso!");
         System.out.println("Bem-vindo, " + usuario.getNome() + " (" + usuario.getTipo() + ")!");
 
-        if (usuario instanceof AdministradorPeca ) {
-            AdmSite.opcaoAdmPeca();
+        if (usuario instanceof AdministradorSite ) {
+            AdmSite.opcaoAdmSite();
         }
         else if (usuario instanceof Cliente) {
             clientef.opcaoCliente();

@@ -9,7 +9,7 @@ public class AdmSite {
     private static InfoPeca[] listaPeca = new InfoPeca[10];
     private static int indice = 0; 
 
-    public static void opcaoAdmPeca(){
+    public static void opcaoAdmSite(){
         int opcao;
         do {
             System.out.println("\n===== Gerenciamento de Peças =====");
