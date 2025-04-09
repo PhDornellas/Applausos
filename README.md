@@ -22,17 +22,17 @@
 
 
 # ENTREGA 1
-  ###  User Stories (Entrega 1)
+  ###  User Stories (POO)
   https://docs.google.com/document/d/1CVNF1YGU3ab3buEGqeYLamaCSP-kYs0ebWv76HE6Xsw/edit?usp=sharing
   
-  ### ScreenCast (Entrega 1)
+  ### ScreenCast (POO)
   https://youtu.be/QYjubRfZDB4
 
 
 
-# ENTREGA 2 (Projetos 3)
+# ENTREGA 2 
 
-### Diagrama de Classes (Entrega )
+### Diagrama de Classes (POO)
 https://docs.google.com/document/d/1MfPmWUnPtXLAXufXZfkr2rMlYaFxvca_1mQkzP2JrzA/edit?usp=sharing
 
 
