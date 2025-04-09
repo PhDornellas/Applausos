@@ -32,9 +32,9 @@
 
 # ENTREGA 2 (Projetos 3)
 
-Diagrama de Entidades (Entrega 2)
+### Diagrama de Classes (Entrega )
+https://docs.google.com/document/d/1MfPmWUnPtXLAXufXZfkr2rMlYaFxvca_1mQkzP2JrzA/edit?usp=sharing
 
-https://docs.google.com/document/d/1kVVXKRnXb1RiEmGGu0aBd9pex3-umYh8qWDfdpwFx4w/edit?usp=sharing
 
 
 
