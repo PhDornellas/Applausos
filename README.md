@@ -27,6 +27,9 @@
   
   ### ScreenCast (POO)
   https://youtu.be/QYjubRfZDB4
+  
+  ### Prototipo figma (POO)
+  https://www.figma.com/design/iaVWaKULpHEvd9q7F5iKqH/Applausos?node-id=0-1
 
 
 
