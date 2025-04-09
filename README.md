@@ -25,7 +25,7 @@
   ###  User Stories (POO)
   https://docs.google.com/document/d/1CVNF1YGU3ab3buEGqeYLamaCSP-kYs0ebWv76HE6Xsw/edit?usp=sharing
   
-  ### ScreenCast (POO)
+  ### YT ScreenCast (POO)
   https://youtu.be/QYjubRfZDB4
   
   ### Prototipo figma (POO)
@@ -37,6 +37,8 @@
 
 ### Diagrama de Classes (POO)
 https://docs.google.com/document/d/1MfPmWUnPtXLAXufXZfkr2rMlYaFxvca_1mQkzP2JrzA/edit?usp=sharing
+### YT ScreenCast codigo(POO)
+https://youtu.be/s7DxenkE47M
 
 
 
