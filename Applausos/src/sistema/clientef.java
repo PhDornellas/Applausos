@@ -67,6 +67,6 @@ public class clientef {
         InfoPeca peca = lista[num - 1];
         System.out.println("Você comprou a peça: " + peca.getNome() 
             + " localizada em " + peca.getLocal() 
-            + " no dia " + peca.getDataFormatada() + " por R$" + peca.getValor());
+            + " no dia " + peca.getDataFormatada() + " por R$" + peca.getValor() + " Confirmação enviada via E-mail.");
     }
 }
