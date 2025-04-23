@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.Scanner;
 import usuario.InfoPeca;
 
-public class AdmSite {
+public class AdmSite_funções {
     private static Scanner ENTRADA = new Scanner(System.in);
     private static InfoPeca[] listaPeca = new InfoPeca[10];
     private static int indice = 0; 

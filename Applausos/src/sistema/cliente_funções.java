@@ -2,9 +2,8 @@ package sistema;
 
 import java.util.Scanner;
 import usuario.InfoPeca;
-import sistema.AdmSite;
 
-public class clientef {
+public class cliente_funções {
 
     private static Scanner entrada = new Scanner(System.in);
 
@@ -35,8 +34,8 @@ public class clientef {
     }
 
     private static void visualizarPecas() {
-        InfoPeca[] lista = AdmSite.getListaPeca();
-        int total = AdmSite.getTotalPecas();
+        InfoPeca[] lista = AdmSite_funções.getListaPeca();
+        int total = AdmSite_funções.getTotalPecas();
         System.out.println("==== Peças Disponíveis ====");
         if (total == 0) {
             System.out.println("Nenhuma peça disponível.");
@@ -51,8 +50,8 @@ public class clientef {
     }
 
     private static void comprarPeca() {
-        InfoPeca[] lista = AdmSite.getListaPeca();
-        int total = AdmSite.getTotalPecas();
+        InfoPeca[] lista = AdmSite_funções.getListaPeca();
+        int total = AdmSite_funções.getTotalPecas();
         if (total == 0) {
             System.out.println("Nenhuma peça disponível para compra.");
             return;

@@ -5,14 +5,14 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class Ensaio {
+public class InfoEnsaio {
     private LocalDate data;
     private LocalTime hora;
     private String local;
     private String feedback;
     private List<String> membros; 
 
-    public Ensaio(LocalDate data, LocalTime hora, String local, String feedback, List<String> membros) {
+    public InfoEnsaio(LocalDate data, LocalTime hora, String local, String feedback, List<String> membros) {
         this.data = data;
         this.hora = hora;
         this.local = local;

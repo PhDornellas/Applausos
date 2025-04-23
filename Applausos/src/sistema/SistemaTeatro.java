@@ -1,9 +1,14 @@
 package sistema;
 
-import usuario.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import usuario.InfoAdministradorPeca;
+import usuario.InfoAdministradorSite; 
+import usuario.InfoCliente;
+import usuario.InfoMembroElenco;
+import usuario.User;
 
 public class SistemaTeatro {
     private static List<User> usuarios = new ArrayList<>();
@@ -37,24 +42,24 @@ public class SistemaTeatro {
         System.out.println("\n===== Cadastro de Usuário =====");
         System.out.print("Nome: ");
         String nome = scanner.nextLine();
-    
+
         System.out.print("E-mail: ");
         String email = scanner.nextLine();
-    
+
         System.out.print("Telefone: ");
         String telefone = scanner.nextLine();
-    
+
         System.out.print("CPF: ");
         String cpf = scanner.nextLine();
-    
+
         if (buscarUsuarioPorCpf(cpf) != null) {
             System.out.println("Já existe um usuário com este CPF.");
             return;
         }
-    
+
         System.out.print("Senha: ");
         String senha = scanner.nextLine();
-    
+
         System.out.println("\nSelecione o tipo de usuário:");
         System.out.println("1. Cliente");
         System.out.println("2. Administrador de Peça");
@@ -62,33 +67,29 @@ public class SistemaTeatro {
         System.out.println("4. Membro de Elenco");
         System.out.print("Opção: ");
         int tipoOpcao = lerInteiro(scanner);
-    
+
         User novoUsuario = switch (tipoOpcao) {
-            case 1 -> new Cliente(nome, email, telefone, cpf, senha);
-            case 2 -> new AdministradorPeca(nome, email, telefone, cpf, senha);
-            case 3 -> new AdministradorSite(nome, email, telefone, cpf, senha);
-            case 4 -> new MembroElenco(nome, email, telefone, cpf, senha);
+            case 1 -> new InfoCliente(nome, email, telefone, cpf, senha);
+            case 2 -> new InfoAdministradorPeca(nome, email, telefone, cpf, senha);
+            case 3 -> new InfoAdministradorSite(nome, email, telefone, cpf, senha);
+            case 4 -> new InfoMembroElenco(nome, email, telefone, cpf, senha);
             default -> {
                 System.out.println("Opção inválida. Cadastro cancelado.");
                 yield null;
             }
         };
-    
+
         if (novoUsuario != null) {
             usuarios.add(novoUsuario);
             System.out.println("\nCadastro realizado com sucesso!");
             System.out.println("Bem-vindo, " + nome + " (" + novoUsuario.getTipo() + ")!");
         }
     }
-    
 
     private static void fazerLogin(Scanner scanner) {
         System.out.println("\n===== Login =====");
         System.out.print("CPF: ");
         String cpf = scanner.nextLine();
-
-        System.out.print("Senha: ");
-        String senha = scanner.nextLine();
 
         User usuario = buscarUsuarioPorCpf(cpf);
         if (usuario == null) {
@@ -96,21 +97,46 @@ public class SistemaTeatro {
             return;
         }
 
-        if (!usuario.getSenha().equals(senha)) {
+        // Loop de tentativa de senha
+        while (true) {
+            System.out.print("Senha: ");
+            String senha = scanner.nextLine();
+
+            if (usuario.getSenha().equals(senha)) {
+                System.out.println("\nLogin realizado com sucesso!");
+                System.out.println("Bem-vindo, " + usuario.getNome() + " (" + usuario.getTipo() + ")!");
+
+                // redireciona de acordo com o tipo
+                if (usuario instanceof InfoAdministradorSite) {
+                    AdmSite_funções.opcaoAdmSite();
+                } else if (usuario instanceof InfoCliente) {
+                    cliente_funções.opcaoCliente();
+                } else if (usuario instanceof InfoAdministradorPeca) {
+                    Admpeca_funções.opcaoAdmPeca();
+                } else if (usuario instanceof InfoMembroElenco) {
+                    Membroelenco_funções.opcaoMembroElenco(usuario.getEmail());
+                }
+                return;
+            }
+
             System.out.println("Senha incorreta.");
-            return;
-        }
+            System.out.println("1. Tentar novamente");
+            System.out.println("2. Recuperar senha");
+            System.out.print("Escolha uma opção: ");
+            int escolha = lerInteiro(scanner);
 
-        System.out.println("\nLogin realizado com sucesso!");
-        System.out.println("Bem-vindo, " + usuario.getNome() + " (" + usuario.getTipo() + ")!");
-
-        if (usuario instanceof AdministradorSite ) {
-            AdmSite.opcaoAdmSite();
+            if (escolha == 1) {
+                continue;  // volta a pedir senha
+            } else if (escolha == 2) {
+                System.out.print("Digite o e-mail para recuperação: ");
+                String emailRec = scanner.nextLine();
+                System.out.println("Link de recuperação enviado para: " + emailRec);
+                return;
+            } else {
+                System.out.println("Opção inválida. Retornando ao menu principal.");
+                return;
+            }
         }
-        else if (usuario instanceof Cliente) {
-            clientef.opcaoCliente();
-        }
-
     }
 
     private static void listarUsuarios() {
@@ -119,25 +145,27 @@ public class SistemaTeatro {
             System.out.println("Nenhum usuário cadastrado.");
         } else {
             for (User u : usuarios) {
-                System.out.println("Nome: " + u.getNome() + " | CPF: " + u.getCpf() + " | Tipo: " + u.getTipo());
+                System.out.println("Nome: " + u.getNome() +
+                                   " | CPF: " + u.getCpf() +
+                                   " | Tipo: " + u.getTipo());
             }
         }
     }
 
     private static User buscarUsuarioPorCpf(String cpf) {
-        return usuarios.stream().filter(u -> u.getCpf().equalsIgnoreCase(cpf)).findFirst().orElse(null);
+        return usuarios.stream()
+                       .filter(u -> u.getCpf().equalsIgnoreCase(cpf))
+                       .findFirst()
+                       .orElse(null);
     }
 
     private static int lerInteiro(Scanner scanner) {
-        int valor;
         while (true) {
             try {
-                valor = Integer.parseInt(scanner.nextLine());
-                break;
+                return Integer.parseInt(scanner.nextLine());
             } catch (NumberFormatException e) {
                 System.out.print("Por favor, insira um número válido: ");
             }
         }
-        return valor;
     }
 }
