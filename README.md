@@ -37,8 +37,14 @@
 
 ### Diagrama de Classes (POO)
 https://docs.google.com/document/d/1MfPmWUnPtXLAXufXZfkr2rMlYaFxvca_1mQkzP2JrzA/edit?usp=sharing
+
 ### YT ScreenCast codigo(POO)
 https://youtu.be/s7DxenkE47M
+
+### BUG tracker no github (POO)
+![image](https://github.com/user-attachments/assets/e9cce4d1-8227-431e-878b-e4821b6d9b6c)
+
+
 
 
 
