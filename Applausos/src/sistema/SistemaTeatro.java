@@ -105,14 +105,14 @@ public class SistemaTeatro {
                 System.out.println("\nLogin realizado com sucesso!");
                 System.out.println("Bem-vindo, " + usuario.getNome() + " (" + usuario.getTipo() + ")!");
 
-                
                 if (usuario instanceof InfoAdministradorSite) {
                     AdmSite_funções.opcaoAdmSite();
                 } else if (usuario instanceof InfoCliente) {
                     cliente_funções.opcaoCliente(usuario.getNome(), usuario.getEmail(), usuario.getTelefone(),
                             usuario.getCpf(), usuario.getSenha());
                 } else if (usuario instanceof InfoAdministradorPeca) {
-                    Admpeca_funções.opcaoAdmPeca();
+                    Admpeca_funções.opcaoAdmPeca(usuario.getNome(), usuario.getEmail(), usuario.getTelefone(),
+                            usuario.getCpf(), usuario.getSenha());
                 } else if (usuario instanceof InfoMembroElenco) {
                     Membroelenco_funções.opcaoMembroElenco(usuario.getEmail());
                 }
@@ -126,7 +126,7 @@ public class SistemaTeatro {
             int escolha = lerInteiro(scanner);
 
             if (escolha == 1) {
-                continue; 
+                continue;
             } else if (escolha == 2) {
                 System.out.print("Digite o e-mail para recuperação: ");
                 String emailRec = scanner.nextLine();

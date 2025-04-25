@@ -40,6 +40,7 @@ public abstract class User {
     public UserType getTipo() {
         return tipo;
     }
+    
 
     public void setNome(String nome) {
         this.nome = nome;
@@ -51,10 +52,6 @@ public abstract class User {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
     }
 
     public void setSenha(String senha) {
