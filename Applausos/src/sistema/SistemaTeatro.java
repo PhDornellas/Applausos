@@ -106,7 +106,8 @@ public class SistemaTeatro {
                 System.out.println("Bem-vindo, " + usuario.getNome() + " (" + usuario.getTipo() + ")!");
 
                 if (usuario instanceof InfoAdministradorSite) {
-                    AdmSite_funções.opcaoAdmSite();
+                    AdmSite_funções.opcaoAdmSite(usuario.getNome(), usuario.getEmail(), usuario.getTelefone(),
+                            usuario.getCpf(), usuario.getSenha());
                 } else if (usuario instanceof InfoCliente) {
                     cliente_funções.opcaoCliente(usuario.getNome(), usuario.getEmail(), usuario.getTelefone(),
                             usuario.getCpf(), usuario.getSenha());
