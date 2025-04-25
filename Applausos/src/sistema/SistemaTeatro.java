@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import usuario.InfoAdministradorPeca;
-import usuario.InfoAdministradorSite; 
+import usuario.InfoAdministradorSite;
 import usuario.InfoCliente;
 import usuario.InfoMembroElenco;
 import usuario.User;
@@ -97,7 +97,6 @@ public class SistemaTeatro {
             return;
         }
 
-        // Loop de tentativa de senha
         while (true) {
             System.out.print("Senha: ");
             String senha = scanner.nextLine();
@@ -106,11 +105,12 @@ public class SistemaTeatro {
                 System.out.println("\nLogin realizado com sucesso!");
                 System.out.println("Bem-vindo, " + usuario.getNome() + " (" + usuario.getTipo() + ")!");
 
-                // redireciona de acordo com o tipo
+                
                 if (usuario instanceof InfoAdministradorSite) {
                     AdmSite_funções.opcaoAdmSite();
                 } else if (usuario instanceof InfoCliente) {
-                    cliente_funções.opcaoCliente();
+                    cliente_funções.opcaoCliente(usuario.getNome(), usuario.getEmail(), usuario.getTelefone(),
+                            usuario.getCpf(), usuario.getSenha());
                 } else if (usuario instanceof InfoAdministradorPeca) {
                     Admpeca_funções.opcaoAdmPeca();
                 } else if (usuario instanceof InfoMembroElenco) {
@@ -126,7 +126,7 @@ public class SistemaTeatro {
             int escolha = lerInteiro(scanner);
 
             if (escolha == 1) {
-                continue;  // volta a pedir senha
+                continue; 
             } else if (escolha == 2) {
                 System.out.print("Digite o e-mail para recuperação: ");
                 String emailRec = scanner.nextLine();
@@ -146,17 +146,17 @@ public class SistemaTeatro {
         } else {
             for (User u : usuarios) {
                 System.out.println("Nome: " + u.getNome() +
-                                   " | CPF: " + u.getCpf() +
-                                   " | Tipo: " + u.getTipo());
+                        " | CPF: " + u.getCpf() +
+                        " | Tipo: " + u.getTipo());
             }
         }
     }
 
     private static User buscarUsuarioPorCpf(String cpf) {
         return usuarios.stream()
-                       .filter(u -> u.getCpf().equalsIgnoreCase(cpf))
-                       .findFirst()
-                       .orElse(null);
+                .filter(u -> u.getCpf().equalsIgnoreCase(cpf))
+                .findFirst()
+                .orElse(null);
     }
 
     private static int lerInteiro(Scanner scanner) {
@@ -168,4 +168,41 @@ public class SistemaTeatro {
             }
         }
     }
+
+    public static boolean editarNome(String cpf, String novoNome) {
+        User usuario = buscarUsuarioPorCpf(cpf);
+        if (usuario != null) {
+            usuario.setNome(novoNome);
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean editarEmail(String cpf, String novoEmail) {
+        User usuario = buscarUsuarioPorCpf(cpf);
+        if (usuario != null) {
+            usuario.setEmail(novoEmail);
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean editarTelefone(String cpf, String novoTelefone) {
+        User usuario = buscarUsuarioPorCpf(cpf);
+        if (usuario != null) {
+            usuario.setTelefone(novoTelefone);
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean editarSenha(String cpf, String novaSenha) {
+        User usuario = buscarUsuarioPorCpf(cpf);
+        if (usuario != null) {
+            usuario.setSenha(novaSenha);
+            return true;
+        }
+        return false;
+    }
+
 }
