@@ -114,7 +114,8 @@ public class SistemaTeatro {
                     Admpeca_funções.opcaoAdmPeca(usuario.getNome(), usuario.getEmail(), usuario.getTelefone(),
                             usuario.getCpf(), usuario.getSenha());
                 } else if (usuario instanceof InfoMembroElenco) {
-                    Membroelenco_funções.opcaoMembroElenco(usuario.getEmail());
+                    Membroelenco_funções.opcaoMembroElenco(usuario.getNome(), usuario.getEmail(), usuario.getTelefone(),
+                            usuario.getCpf(), usuario.getSenha());
                 }
                 return;
             }
