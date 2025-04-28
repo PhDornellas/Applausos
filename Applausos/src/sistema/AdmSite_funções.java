@@ -37,7 +37,7 @@ public class AdmSite_funções {
                     deletarPeca();
                     break;
                 case 5:
-                    editarPerfilAdmSite(nome, email, telefone, cpf, senha);;
+                    editarPerfilAdmSite(nome, email, telefone, cpf, senha);
                     break;
                 case 6:
                     System.out.println("Encerrando o sistema");
