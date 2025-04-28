@@ -46,6 +46,16 @@ https://youtu.be/s7DxenkE47M
 
 
 
+# ENTREGA 3
+
+### Diagrama de Classes (POO)
+https://docs.google.com/document/d/1MfPmWUnPtXLAXufXZfkr2rMlYaFxvca_1mQkzP2JrzA/edit?usp=sharing
+
+
+
+
+
+
 
 
 
