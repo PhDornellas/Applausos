@@ -49,6 +49,7 @@ public class AdmSite_funções {
         exibirCalendarioDatasCadastradas();
         System.out.println("==== CADASTRANDO PEÇA ====");
         ENTRADA.nextLine();
+        System.out.print("Nome: ");
         String nome = ENTRADA.nextLine();
         System.out.print("Dia: ");
         int dia = ENTRADA.nextInt();
@@ -59,6 +60,7 @@ public class AdmSite_funções {
         System.out.print("Valor: ");
         double valor = ENTRADA.nextDouble();
         ENTRADA.nextLine();
+        System.out.print("Local: ");
         String local = ENTRADA.nextLine();
         listaPeca[indice++] = new InfoPeca(nome, dia, mes, ano, valor, local);
         System.out.println("Peça cadastrada com sucesso!");
