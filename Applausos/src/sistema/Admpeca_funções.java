@@ -18,18 +18,20 @@ public class Admpeca_funções {
             System.out.println("\n===== Gerenciamento de Ensaios =====");
             System.out.println("1. Cadastrar ensaio");
             System.out.println("2. Listar ensaios");
-            System.out.println("3. Editar perfil");
-            System.out.println("4. Sair");
+            System.out.println("3. Ver agenda de ator");
+            System.out.println("4. Editar perfil");
+            System.out.println("5. Sair");
             System.out.print("Escolha uma opção: ");
             opcao = Integer.parseInt(entrada.nextLine());
             switch (opcao) {
                 case 1 -> cadastrarEnsaio();
                 case 2 -> listarEnsaios();
-                case 3 -> editarPerfilAdmPeca(nome,email ,telefone ,cpf ,senha);
-                case 4 -> System.out.println("Retornando ao menu principal...");
+                case 3 -> visualizarAgendaAtor();
+                case 4 -> editarPerfilAdmPeca(nome, email, telefone, cpf, senha);
+                case 5 -> System.out.println("Retornando ao menu principal...");
                 default -> System.out.println("Opção inválida.");
             }
-        } while (opcao != 4);
+        } while (opcao != 5);
     }
 
     private static void cadastrarEnsaio() {
@@ -74,95 +76,89 @@ public class Admpeca_funções {
         } else {
             for (int i = 0; i < listaEnsaios.size(); i++) {
                 InfoEnsaio e = listaEnsaios.get(i);
-                System.out.println("Ensaio " + (i + 1) + ": Data " + e.getDataFormatada() +
-                                   ", Hora " + e.getHoraFormatada() +
-                                   ", Local: " + e.getLocal() +
-                                   ", Feedback: " + e.getFeedback() +
-                                   ", Membros: " + e.getMembros());
+                System.out.println("Ensaio " + (i + 1) +
+                    ": Data " + e.getDataFormatada() +
+                    ", Hora " + e.getHoraFormatada() +
+                    ", Local: " + e.getLocal() +
+                    ", Feedback: " + e.getFeedback() +
+                    ", Membros: " + e.getMembros());
             }
         }
+    }
+
+    private static void visualizarAgendaAtor() {
+        System.out.print("Digite o e-mail do ator: ");
+        String email = entrada.nextLine().trim();
+        boolean encontrou = false;
+        System.out.println("Ensaios agendados para " + email + ":");
+        for (InfoEnsaio e : listaEnsaios) {
+            if (e.getMembros().contains(email)) {
+                encontrou = true;
+                System.out.println("Data: " + e.getDataFormatada() +
+                    ", Hora: " + e.getHoraFormatada() +
+                    ", Local: " + e.getLocal());
+            }
+        }
+        if (!encontrou) {
+            System.out.println("Nenhum ensaio encontrado para este e-mail.");
+        }
+    }
+
+    private static void editarPerfilAdmPeca(String nome, String email, String telefone, String cpf, String senha) {
+        int opcaoEditar;
+        do {
+            System.out.println("\n===== Editar perfil =====");
+            System.out.println("1. Nome");
+            System.out.println("2. Email");
+            System.out.println("3. Telefone");
+            System.out.println("4. Senha");
+            System.out.println("5. Sair");
+            System.out.print("Escolha uma opção: ");
+            opcaoEditar = Integer.parseInt(entrada.nextLine());
+            switch (opcaoEditar) {
+                case 1 -> {
+                    System.out.println("Nome atual: " + nome);
+                    System.out.print("Novo nome: ");
+                    String novoNome = entrada.nextLine();
+                    if (SistemaTeatro.editarNome(cpf, novoNome))
+                        System.out.println("Nome atualizado com sucesso!");
+                    else
+                        System.out.println("Usuário não encontrado.");
+                }
+                case 2 -> {
+                    System.out.println("Email atual: " + email);
+                    System.out.print("Novo email: ");
+                    String novoEmail = entrada.nextLine();
+                    if (SistemaTeatro.editarEmail(cpf, novoEmail))
+                        System.out.println("Email atualizado com sucesso!");
+                    else
+                        System.out.println("Usuário não encontrado.");
+                }
+                case 3 -> {
+                    System.out.println("Telefone atual: " + telefone);
+                    System.out.print("Novo telefone: ");
+                    String novoTelefone = entrada.nextLine();
+                    if (SistemaTeatro.editarTelefone(cpf, novoTelefone))
+                        System.out.println("Telefone atualizado com sucesso!");
+                    else
+                        System.out.println("Usuário não encontrado.");
+                }
+                case 4 -> {
+                    System.out.println("Senha atual: " + senha);
+                    System.out.print("Nova senha: ");
+                    String novaSenha = entrada.nextLine();
+                    if (SistemaTeatro.editarSenha(cpf, novaSenha))
+                        System.out.println("Senha atualizada com sucesso!");
+                    else
+                        System.out.println("Usuário não encontrado.");
+                }
+                case 5 -> System.out.println("Saindo...");
+                default -> System.out.println("Opção inválida.");
+            }
+        } while (opcaoEditar != 5);
     }
 
     public static List<InfoEnsaio> getListaEnsaios() {
         return listaEnsaios;
     }
-
-    private static void editarPerfilAdmPeca(String nome, String email, String telefone, String cpf, String senha) {
-
-        int opcaoEditar;
-        do {
-            
-            System.out.println("\n===== Editar perfil =====");
-            System.out.println("O que deseja alterar? ");
-            System.out.println("1. Nome ");
-            System.out.println("2. Email ");
-            System.out.println("3. Telefone ");
-            System.out.println("4. Senha ");
-            System.out.println("5. Sair ");
-            opcaoEditar = entrada.nextInt();
-            entrada.nextLine();
-
-            switch (opcaoEditar) {
-                case 1:
-                    System.out.println("Nome atual: " + nome);
-                    System.out.print("Informe o novo nome: ");
-                    String novoNome = entrada.nextLine();
-
-                    if (SistemaTeatro.editarNome(cpf, novoNome)) {
-                        System.out.println("Nome atualizado com sucesso! ");
-                    } else {
-                        System.out.println("Usuario nao encontrado.");
-                    }
-                    break;
-
-                case 2:
-                    System.out.println("Email atual " + email);
-                    System.out.println("Informe o novo Email: ");
-                    String novoEmail = entrada.nextLine();
-
-                    if (SistemaTeatro.editarEmail(cpf, novoEmail)) {
-                        System.out.println("Email atualizado com sucesso! ");
-                    } else {
-                        System.out.println("Usuario nao encontrado");
-                    }
-                    break;
-
-                case 3:
-                    System.out.println("Telefone atual: " + telefone);
-                    System.out.println("Informe o novo telefone ");
-                    String novoTelefone = entrada.nextLine();
-
-                    if (SistemaTeatro.editarTelefone(cpf, novoTelefone)) {
-                        System.out.println("Telefone atualizado com sucesso! ");
-                    } else {
-                        System.out.println("Usuario nao encontrado ");
-                    }
-
-                    break;
-                case 4:
-                    System.out.println("Senha atual " + senha);
-                    System.out.println("Informe a nova Senha ");
-                    String novaSenha = entrada.nextLine();
-
-                    if (SistemaTeatro.editarSenha(cpf, novaSenha)) {
-                        System.out.println("Senha atualizada com sucesso! ");
-                    } else {
-                        System.out.println("Usuario nao encontrado");
-                    }
-                    break;
-
-                case 5:
-                    System.out.println("Saindo...");
-                    break;
-
-                default:
-                    System.out.println("Numero invalido. ");
-                    break;
-            }
-
-        } while (opcaoEditar!=5);
-        
-
-    }
-
 }
