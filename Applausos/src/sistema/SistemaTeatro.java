@@ -108,8 +108,7 @@ public class SistemaTeatro {
                 if (usuario instanceof InfoAdministradorSite) {
                     AdmSite_funções.opcaoAdmSite();
                 } else if (usuario instanceof InfoCliente) {
-                    cliente_funções.opcaoCliente(usuario.getNome(), usuario.getEmail(), usuario.getTelefone(),
-                            usuario.getCpf(), usuario.getSenha());
+                    cliente_funções.opcaoCliente();
                 } else if (usuario instanceof InfoAdministradorPeca) {
                     Admpeca_funções.opcaoAdmPeca(usuario.getNome(), usuario.getEmail(), usuario.getTelefone(),
                             usuario.getCpf(), usuario.getSenha());
