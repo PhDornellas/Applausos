@@ -2,6 +2,8 @@ package usuario;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class InfoPeca {
     private String nomePeca;
@@ -10,6 +12,7 @@ public class InfoPeca {
     private String local;
     private int ingressosVendidos;
     private static final int CAPACIDADE = 100;
+    private List<InfoAvaliacao> avaliacoes = new ArrayList<>();
 
     public InfoPeca(String nomePeca, int dia, int mes, int ano, double valor, String local) {
         this.nomePeca = nomePeca;
@@ -33,4 +36,8 @@ public class InfoPeca {
     public int getIngressosVendidos() { return ingressosVendidos; }
     public void incrementarIngressosVendidos() { this.ingressosVendidos++; }
     public int getIngressosRestantes() { return CAPACIDADE - ingressosVendidos; }
+    public void adicionarAvaliacao(int estrelas, String comentario) {
+        this.avaliacoes.add(new InfoAvaliacao(estrelas, comentario));
+    }
+    public List<InfoAvaliacao> getAvaliacoes() { return avaliacoes; }
 }

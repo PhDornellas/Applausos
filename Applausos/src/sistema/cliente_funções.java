@@ -12,23 +12,19 @@ public class cliente_funções {
             System.out.println("\n===== Menu do Cliente =====");
             System.out.println("1. Visualizar peças disponíveis");
             System.out.println("2. Comprar peça");
-            System.out.println("3. Sair");
+            System.out.println("3. Avaliar peça");
+            System.out.println("4. Sair");
             System.out.print("Escolha uma opção: ");
             opcao = entrada.nextInt();
+            entrada.nextLine();
             switch (opcao) {
-                case 1:
-                    visualizarPecas();
-                    break;
-                case 2:
-                    comprarPeca();
-                    break;
-                case 3:
-                    System.out.println("Encerrando o sistema do cliente.");
-                    break;
-                default:
-                    System.out.println("Opção inválida!");
+                case 1 -> visualizarPecas();
+                case 2 -> comprarPeca();
+                case 3 -> avaliarPeca();
+                case 4 -> System.out.println("Encerrando o sistema do cliente.");
+                default -> System.out.println("Opção inválida!");
             }
-        } while (opcao != 3);
+        } while (opcao != 4);
     }
 
     private static void visualizarPecas() {
@@ -41,10 +37,12 @@ public class cliente_funções {
             for (int i = 0; i < total; i++) {
                 InfoPeca p = lista[i];
                 System.out.println("Peça " + (i + 1) + ": " 
-                    + p.getNome() 
-                    + ", Data: " + p.getDataFormatada() 
-                    + ", Valor: R$ " + p.getValor() 
-                    + ", Local: " + p.getLocal());
+                    + p.getNome()
+                    + " | Data: " + p.getDataFormatada()
+                    + " | Valor: R$" + p.getValor()
+                    + " | Local: " + p.getLocal()
+                    + " | Vendidos: " + p.getIngressosVendidos()
+                    + " | Restantes: " + p.getIngressosRestantes());
             }
         }
     }
@@ -64,12 +62,44 @@ public class cliente_funções {
             return;
         }
         InfoPeca peca = lista[num - 1];
-        peca.incrementarIngressosVendidos();
-        System.out.println("Você comprou a peça: " 
-            + peca.getNome() 
-            + " localizada em " + peca.getLocal() 
-            + " no dia " + peca.getDataFormatada() 
-            + " por R$" + peca.getValor() 
-            + ". Confirmação enviada via E-mail.");
+        if (peca.getIngressosRestantes() > 0) {
+            peca.incrementarIngressosVendidos();
+            System.out.println("Ingresso comprado com sucesso!");
+        } else {
+            System.out.println("Não há ingressos disponíveis para esta peça.");
+        }
+    }
+
+    private static void avaliarPeca() {
+        InfoPeca[] lista = AdmSite_funções.getListaPeca();
+        int total = AdmSite_funções.getTotalPecas();
+        if (total == 0) {
+            System.out.println("Nenhuma peça cadastrada.");
+            return;
+        }
+        System.out.print("Digite o nome da peça que deseja avaliar: ");
+        String nome = entrada.nextLine();
+        InfoPeca selecionada = null;
+        for (int i = 0; i < total; i++) {
+            if (lista[i].getNome().equalsIgnoreCase(nome)) {
+                selecionada = lista[i];
+                break;
+            }
+        }
+        if (selecionada == null) {
+            System.out.println("Peça não encontrada.");
+            return;
+        }
+        System.out.print("Classificação (0 a 5): ");
+        int estrelas = entrada.nextInt();
+        entrada.nextLine();
+        if (estrelas < 0 || estrelas > 5) {
+            System.out.println("Classificação inválida.");
+            return;
+        }
+        System.out.print("Comentário: ");
+        String comentario = entrada.nextLine();
+        selecionada.adicionarAvaliacao(estrelas, comentario);
+        System.out.println("Avaliação registrada!");
     }
 }
