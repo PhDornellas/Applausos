@@ -6,14 +6,15 @@ import usuario.InfoPeca;
 public class cliente_funções {
     private static Scanner entrada = new Scanner(System.in);
 
-    public static void opcaoCliente() {
+    public static void opcaoCliente(String nome, String email, String telefone, String cpf, String senha) {
         int opcao;
         do {
             System.out.println("\n===== Menu do Cliente =====");
             System.out.println("1. Visualizar peças disponíveis");
             System.out.println("2. Comprar peça");
             System.out.println("3. Avaliar peça");
-            System.out.println("4. Sair");
+            System.out.println("4. Editar Perfil");
+            System.out.println("5. Sair");
             System.out.print("Escolha uma opção: ");
             opcao = entrada.nextInt();
             entrada.nextLine();
@@ -21,10 +22,11 @@ public class cliente_funções {
                 case 1 -> visualizarPecas(false);
                 case 2 -> comprarPeca();
                 case 3 -> avaliarPeca();
-                case 4 -> System.out.println("Encerrando o sistema do cliente.");
+                case 4 -> editarPerfilCliente(nome, email, telefone, cpf, senha);
+                case 5 -> System.out.println("Encerrando o sistema do cliente.");
                 default -> System.out.println("Opção inválida!");
             }
-        } while (opcao != 4);
+        } while (opcao != 5);
     }
 
     private static void visualizarPecas(Boolean meia) {
@@ -129,5 +131,83 @@ public class cliente_funções {
         String comentario = entrada.nextLine();
         selecionada.adicionarAvaliacao(estrelas, comentario);
         System.out.println("Avaliação registrada!");
+    }
+
+        private static void editarPerfilCliente(String nome, String email, String telefone, String cpf, String senha) {
+
+        int opcaoEditar;
+        do {
+            
+            System.out.println("\n===== Editar perfil =====");
+            System.out.println("O que deseja alterar? ");
+            System.out.println("1. Nome ");
+            System.out.println("2. Email ");
+            System.out.println("3. Telefone ");
+            System.out.println("4. Senha ");
+            System.out.println("5. Sair ");
+            opcaoEditar = entrada.nextInt();
+            entrada.nextLine();
+
+            switch (opcaoEditar) {
+                case 1:
+                    System.out.println("Nome atual: " + nome);
+                    System.out.print("Informe o novo nome: ");
+                    String novoNome = entrada.nextLine();
+
+                    if (SistemaTeatro.editarNome(cpf, novoNome)) {
+                        System.out.println("Nome atualizado com sucesso! ");
+                    } else {
+                        System.out.println("Usuario nao encontrado.");
+                    }
+                    break;
+
+                case 2:
+                    System.out.println("Email atual " + email);
+                    System.out.println("Informe o novo Email: ");
+                    String novoEmail = entrada.nextLine();
+
+                    if (SistemaTeatro.editarEmail(cpf, novoEmail)) {
+                        System.out.println("Email atualizado com sucesso! ");
+                    } else {
+                        System.out.println("Usuario nao encontrado");
+                    }
+                    break;
+
+                case 3:
+                    System.out.println("Telefone atual: " + telefone);
+                    System.out.println("Informe o novo telefone ");
+                    String novoTelefone = entrada.nextLine();
+
+                    if (SistemaTeatro.editarTelefone(cpf, novoTelefone)) {
+                        System.out.println("Telefone atualizado com sucesso! ");
+                    } else {
+                        System.out.println("Usuario nao encontrado ");
+                    }
+
+                    break;
+                case 4:
+                    System.out.println("Senha atual " + senha);
+                    System.out.println("Informe a nova Senha ");
+                    String novaSenha = entrada.nextLine();
+
+                    if (SistemaTeatro.editarSenha(cpf, novaSenha)) {
+                        System.out.println("Senha atualizada com sucesso! ");
+                    } else {
+                        System.out.println("Usuario nao encontrado");
+                    }
+                    break;
+
+                case 5:
+                    System.out.println("Saindo...");
+                    break;
+
+                default:
+                    System.out.println("Numero invalido. ");
+                    break;
+            }
+
+        } while (opcaoEditar!=5);
+        
+
     }
 }

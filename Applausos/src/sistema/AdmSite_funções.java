@@ -5,19 +5,21 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.TextStyle;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeSet;
 import usuario.InfoPeca;
+import usuario.User;
 
 public class AdmSite_funções {
     private static Scanner ENTRADA = new Scanner(System.in);
     private static InfoPeca[] listaPeca = new InfoPeca[10];
     private static int indice = 0;
 
-    public static void opcaoAdmSite() {
+    public static void opcaoAdmSite(List<User> usuarios) {
         int opcao;
         do {
             System.out.println("\n===== Gerenciamento de Peças =====");
@@ -26,7 +28,8 @@ public class AdmSite_funções {
             System.out.println("3. Editar peça");
             System.out.println("4. Deletar peça");
             System.out.println("5. Ver vendas de ingressos");
-            System.out.println("6. Sair");
+            System.out.println("6. Deletar usuarios");
+            System.out.println("7. Sair");
             System.out.print("Escolha uma opção: ");
             opcao = ENTRADA.nextInt();
             switch (opcao) {
@@ -35,10 +38,11 @@ public class AdmSite_funções {
                 case 3 -> editarPeca();
                 case 4 -> deletarPeca();
                 case 5 -> visualizarVendas();
-                case 6 -> System.out.println("Encerrando o sistema");
+                case 6 -> deletarUsuario(usuarios);
+                case 7 -> System.out.println("Encerrando o sistema");
                 default -> System.out.println("Opção inválida");
             }
-        } while (opcao != 6);
+        } while (opcao != 7);
     }
 
     private static void cadastrarPeca() {
@@ -193,6 +197,42 @@ public class AdmSite_funções {
             System.out.println("\n");
         }
     }
+
+    private static void listarUsuarios(List<User> usuarios) {
+    System.out.println("\n===== Usuários Cadastrados =====");
+    if (usuarios.isEmpty()) {
+        System.out.println("Nenhum usuário cadastrado.");
+    } else {
+        for (User u : usuarios) {
+            System.out.println("Nome: " + u.getNome() +
+                    " | CPF: " + u.getCpf() +
+                    " | Tipo: " + u.getTipo());
+        }
+    }
+}
+
+
+private static void deletarUsuario(List<User> usuarios) {
+    listarUsuarios(usuarios);
+    if (usuarios.isEmpty()) return;
+    ENTRADA.nextLine();
+    
+    System.out.print("\nDigite o CPF do usuário que deseja deletar: ");
+    String cpf = ENTRADA.nextLine();
+
+    User user = usuarios.stream()
+                        .filter(u -> u.getCpf().equalsIgnoreCase(cpf))
+                        .findFirst()
+                        .orElse(null);
+
+    if (user == null) {
+        System.out.println("Usuário não encontrado.");
+    } else {
+        usuarios.remove(user);
+        System.out.println("Usuário removido com sucesso.");
+    }
+}
+
 
     public static InfoPeca[] getListaPeca() {
         return listaPeca;
