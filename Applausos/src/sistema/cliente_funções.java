@@ -18,7 +18,7 @@ public class cliente_funções {
             opcao = entrada.nextInt();
             entrada.nextLine();
             switch (opcao) {
-                case 1 -> visualizarPecas();
+                case 1 -> visualizarPecas(false);
                 case 2 -> comprarPeca();
                 case 3 -> avaliarPeca();
                 case 4 -> System.out.println("Encerrando o sistema do cliente.");
@@ -27,23 +27,39 @@ public class cliente_funções {
         } while (opcao != 4);
     }
 
-    private static void visualizarPecas() {
+    private static void visualizarPecas(Boolean meia) {
         InfoPeca[] lista = AdmSite_funções.getListaPeca();
         int total = AdmSite_funções.getTotalPecas();
         System.out.println("==== Peças Disponíveis ====");
         if (total == 0) {
             System.out.println("Nenhuma peça disponível.");
         } else {
-            for (int i = 0; i < total; i++) {
+            if (meia == true) {
+                 for (int i = 0; i < total; i++) {
                 InfoPeca p = lista[i];
                 System.out.println("Peça " + (i + 1) + ": " 
                     + p.getNome()
                     + " | Data: " + p.getDataFormatada()
-                    + " | Valor: R$" + p.getValor()
+                    + " | Valor: R$" + p.getValor() / 2
                     + " | Local: " + p.getLocal()
                     + " | Vendidos: " + p.getIngressosVendidos()
                     + " | Restantes: " + p.getIngressosRestantes());
             }
+            }
+
+            else{
+                 for (int i = 0; i < total; i++) {
+                    InfoPeca p = lista[i];
+                    System.out.println("Peça " + (i + 1) + ": " 
+                        + p.getNome()
+                        + " | Data: " + p.getDataFormatada()
+                        + " | Valor: R$" + p.getValor() 
+                        + " | Local: " + p.getLocal()
+                        + " | Vendidos: " + p.getIngressosVendidos()
+                        + " | Restantes: " + p.getIngressosRestantes());
+            }
+            }
+           
         }
     }
 
@@ -54,9 +70,21 @@ public class cliente_funções {
             System.out.println("Nenhuma peça disponível para compra.");
             return;
         }
-        visualizarPecas();
+
+        System.out.println("Deseja comprar meia entrada? (S/N) ");
+        String opcaoMeia = entrada.nextLine().toUpperCase();
+
+        if (opcaoMeia.equals("S")) {
+            visualizarPecas(true);
+        }
+        else{
+            visualizarPecas(false);
+        }
+
+       
         System.out.print("Digite o número da peça que deseja comprar: ");
         int num = entrada.nextInt();
+
         if (num < 1 || num > total) {
             System.out.println("Número inválido!");
             return;
