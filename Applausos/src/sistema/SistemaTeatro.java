@@ -1,22 +1,22 @@
 package sistema;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-
 import usuario.InfoAdministradorPeca;
 import usuario.InfoAdministradorSite;
 import usuario.InfoCliente;
 import usuario.InfoMembroElenco;
 import usuario.User;
+import util.PersistenceUtil;
+
+import java.util.List;
+import java.util.Scanner;
 
 public class SistemaTeatro {
-    private static List<User> usuarios = new ArrayList<>();
+    public static List<User> usuarios =
+        PersistenceUtil.loadList("usuarios.ser");
 
     public static void executar() {
         Scanner entrada = new Scanner(System.in);
         int opcao;
-
         do {
             System.out.println("\n===== Applausos =====");
             System.out.println("1. Cadastro");
@@ -25,7 +25,6 @@ public class SistemaTeatro {
             System.out.println("4. Sair");
             System.out.print("Escolha uma opção: ");
             opcao = lerInteiro(entrada);
-
             switch (opcao) {
                 case 1 -> cadastrarUsuario(entrada);
                 case 2 -> fazerLogin(entrada);
@@ -34,7 +33,6 @@ public class SistemaTeatro {
                 default -> System.out.println("Opção inválida. Tente novamente.");
             }
         } while (opcao != 4);
-
         entrada.close();
     }
 
@@ -42,21 +40,16 @@ public class SistemaTeatro {
         System.out.println("\n===== Cadastro de Usuário =====");
         System.out.print("Nome: ");
         String nome = scanner.nextLine();
-
         System.out.print("E-mail: ");
         String email = scanner.nextLine();
-
         System.out.print("Telefone: ");
         String telefone = scanner.nextLine();
-
         System.out.print("CPF: ");
         String cpf = scanner.nextLine();
-
         if (buscarUsuarioPorCpf(cpf) != null) {
             System.out.println("Já existe um usuário com este CPF.");
             return;
         }
-
         System.out.print("Senha: ");
         String senha = scanner.nextLine();
 
@@ -90,45 +83,54 @@ public class SistemaTeatro {
         System.out.println("\n===== Login =====");
         System.out.print("CPF: ");
         String cpf = scanner.nextLine();
-
         User usuario = buscarUsuarioPorCpf(cpf);
         if (usuario == null) {
             System.out.println("Usuário não encontrado.");
             return;
         }
-
         while (true) {
             System.out.print("Senha: ");
             String senha = scanner.nextLine();
-
             if (usuario.getSenha().equals(senha)) {
                 System.out.println("\nLogin realizado com sucesso!");
-                System.out.println("Bem-vindo, " + usuario.getNome() + " (" + usuario.getTipo() + ")!");
-
+                System.out.println("Bem-vindo, " + usuario.getNome() +
+                                   " (" + usuario.getTipo() + ")!");
                 if (usuario instanceof InfoAdministradorSite) {
                     AdmSite_funções.opcaoAdmSite(usuarios);
                 } else if (usuario instanceof InfoCliente) {
-                    cliente_funções.opcaoCliente(usuario.getNome(), usuario.getEmail(), usuario.getTelefone(),
-                            usuario.getCpf(), usuario.getSenha());
+                    cliente_funções.opcaoCliente(
+                        usuario.getNome(),
+                        usuario.getEmail(),
+                        usuario.getTelefone(),
+                        usuario.getCpf(),
+                        usuario.getSenha()
+                    );
                 } else if (usuario instanceof InfoAdministradorPeca) {
-                    Admpeca_funções.opcaoAdmPeca(usuario.getNome(), usuario.getEmail(), usuario.getTelefone(),
-                            usuario.getCpf(), usuario.getSenha());
+                    Admpeca_funções.opcaoAdmPeca(
+                        usuario.getNome(),
+                        usuario.getEmail(),
+                        usuario.getTelefone(),
+                        usuario.getCpf(),
+                        usuario.getSenha()
+                    );
                 } else if (usuario instanceof InfoMembroElenco) {
-                    Membroelenco_funções.opcaoMembroElenco(usuario.getNome(), usuario.getEmail(), usuario.getTelefone(),
-                            usuario.getCpf(), usuario.getSenha());
+                    Membroelenco_funções.opcaoMembroElenco(
+                        usuario.getNome(),
+                        usuario.getEmail(),
+                        usuario.getTelefone(),
+                        usuario.getCpf(),
+                        usuario.getSenha()
+                    );
                 }
                 return;
             }
-
             System.out.println("Senha incorreta.");
             System.out.println("1. Tentar novamente");
             System.out.println("2. Recuperar senha");
             System.out.print("Escolha uma opção: ");
             int escolha = lerInteiro(scanner);
-
-            if (escolha == 1) {
-                continue;
-            } else if (escolha == 2) {
+            if (escolha == 1) continue;
+            else if (escolha == 2) {
                 System.out.print("Digite o e-mail para recuperação: ");
                 String emailRec = scanner.nextLine();
                 System.out.println("Link de recuperação enviado para: " + emailRec);
@@ -147,17 +149,17 @@ public class SistemaTeatro {
         } else {
             for (User u : usuarios) {
                 System.out.println("Nome: " + u.getNome() +
-                        " | CPF: " + u.getCpf() +
-                        " | Tipo: " + u.getTipo());
+                                   " | CPF: " + u.getCpf() +
+                                   " | Tipo: " + u.getTipo());
             }
         }
     }
 
     private static User buscarUsuarioPorCpf(String cpf) {
         return usuarios.stream()
-                .filter(u -> u.getCpf().equalsIgnoreCase(cpf))
-                .findFirst()
-                .orElse(null);
+                       .filter(u -> u.getCpf().equalsIgnoreCase(cpf))
+                       .findFirst()
+                       .orElse(null);
     }
 
     private static int lerInteiro(Scanner scanner) {
@@ -178,7 +180,6 @@ public class SistemaTeatro {
         }
         return false;
     }
-
     public static boolean editarEmail(String cpf, String novoEmail) {
         User usuario = buscarUsuarioPorCpf(cpf);
         if (usuario != null) {
@@ -187,7 +188,6 @@ public class SistemaTeatro {
         }
         return false;
     }
-
     public static boolean editarTelefone(String cpf, String novoTelefone) {
         User usuario = buscarUsuarioPorCpf(cpf);
         if (usuario != null) {
@@ -196,7 +196,6 @@ public class SistemaTeatro {
         }
         return false;
     }
-
     public static boolean editarSenha(String cpf, String novaSenha) {
         User usuario = buscarUsuarioPorCpf(cpf);
         if (usuario != null) {
@@ -205,5 +204,4 @@ public class SistemaTeatro {
         }
         return false;
     }
-
 }

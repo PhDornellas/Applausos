@@ -1,12 +1,19 @@
 package sistema;
 
-import java.util.Scanner;
 import usuario.InfoPeca;
+import util.PersistenceUtil;
+
+import java.util.List;
+import java.util.Scanner;
 
 public class cliente_funções {
     private static Scanner entrada = new Scanner(System.in);
 
-    public static void opcaoCliente(String nome, String email, String telefone, String cpf, String senha) {
+    public static void opcaoCliente(String nome,
+                                    String email,
+                                    String telefone,
+                                    String cpf,
+                                    String senha) {
         int opcao;
         do {
             System.out.println("\n===== Menu do Cliente =====");
@@ -23,45 +30,38 @@ public class cliente_funções {
                 case 2 -> comprarPeca();
                 case 3 -> avaliarPeca();
                 case 4 -> editarPerfilCliente(nome, email, telefone, cpf, senha);
-                case 5 -> System.out.println("Encerrando o sistema do cliente.");
+                case 5 -> {
+                    // Salva o estado das peças antes de sair
+                    PersistenceUtil.saveList(
+                        List.of(AdmSite_funções.getListaPeca())
+                            .subList(0, AdmSite_funções.getTotalPecas()),
+                        "peca.ser"
+                    );
+                    System.out.println("Encerrando o sistema do cliente.");
+                }
                 default -> System.out.println("Opção inválida!");
             }
         } while (opcao != 5);
     }
 
-    private static void visualizarPecas(Boolean meia) {
+    private static void visualizarPecas(boolean meia) {
         InfoPeca[] lista = AdmSite_funções.getListaPeca();
         int total = AdmSite_funções.getTotalPecas();
         System.out.println("==== Peças Disponíveis ====");
         if (total == 0) {
             System.out.println("Nenhuma peça disponível.");
         } else {
-            if (meia == true) {
-                 for (int i = 0; i < total; i++) {
+            for (int i = 0; i < total; i++) {
                 InfoPeca p = lista[i];
-                System.out.println("Peça " + (i + 1) + ": " 
+                double valor = meia ? p.getValor() / 2 : p.getValor();
+                System.out.println("Peça " + (i + 1) + ": "
                     + p.getNome()
                     + " | Data: " + p.getDataFormatada()
-                    + " | Valor: R$" + p.getValor() / 2
+                    + " | Valor: R$" + valor
                     + " | Local: " + p.getLocal()
                     + " | Vendidos: " + p.getIngressosVendidos()
                     + " | Restantes: " + p.getIngressosRestantes());
             }
-            }
-
-            else{
-                 for (int i = 0; i < total; i++) {
-                    InfoPeca p = lista[i];
-                    System.out.println("Peça " + (i + 1) + ": " 
-                        + p.getNome()
-                        + " | Data: " + p.getDataFormatada()
-                        + " | Valor: R$" + p.getValor() 
-                        + " | Local: " + p.getLocal()
-                        + " | Vendidos: " + p.getIngressosVendidos()
-                        + " | Restantes: " + p.getIngressosRestantes());
-            }
-            }
-           
         }
     }
 
@@ -73,20 +73,13 @@ public class cliente_funções {
             return;
         }
 
-        System.out.println("Deseja comprar meia entrada? (S/N) ");
-        String opcaoMeia = entrada.nextLine().toUpperCase();
+        System.out.print("Deseja comprar meia entrada? (S/N) ");
+        String opcaoMeia = entrada.nextLine().trim().toUpperCase();
+        boolean meia = opcaoMeia.equals("S");
+        visualizarPecas(meia);
 
-        if (opcaoMeia.equals("S")) {
-            visualizarPecas(true);
-        }
-        else{
-            visualizarPecas(false);
-        }
-
-       
         System.out.print("Digite o número da peça que deseja comprar: ");
         int num = entrada.nextInt();
-
         if (num < 1 || num > total) {
             System.out.println("Número inválido!");
             return;
@@ -133,81 +126,67 @@ public class cliente_funções {
         System.out.println("Avaliação registrada!");
     }
 
-        private static void editarPerfilCliente(String nome, String email, String telefone, String cpf, String senha) {
-
+    private static void editarPerfilCliente(String nome,
+                                            String email,
+                                            String telefone,
+                                            String cpf,
+                                            String senha) {
         int opcaoEditar;
         do {
-            
             System.out.println("\n===== Editar perfil =====");
-            System.out.println("O que deseja alterar? ");
             System.out.println("1. Nome ");
             System.out.println("2. Email ");
             System.out.println("3. Telefone ");
             System.out.println("4. Senha ");
             System.out.println("5. Sair ");
+            System.out.print("Escolha uma opção: ");
             opcaoEditar = entrada.nextInt();
             entrada.nextLine();
 
             switch (opcaoEditar) {
-                case 1:
+                case 1 -> {
                     System.out.println("Nome atual: " + nome);
                     System.out.print("Informe o novo nome: ");
                     String novoNome = entrada.nextLine();
-
                     if (SistemaTeatro.editarNome(cpf, novoNome)) {
-                        System.out.println("Nome atualizado com sucesso! ");
+                        System.out.println("Nome atualizado com sucesso!");
                     } else {
-                        System.out.println("Usuario nao encontrado.");
+                        System.out.println("Usuário não encontrado.");
                     }
-                    break;
-
-                case 2:
-                    System.out.println("Email atual " + email);
-                    System.out.println("Informe o novo Email: ");
+                }
+                case 2 -> {
+                    System.out.println("Email atual: " + email);
+                    System.out.print("Informe o novo Email: ");
                     String novoEmail = entrada.nextLine();
-
                     if (SistemaTeatro.editarEmail(cpf, novoEmail)) {
-                        System.out.println("Email atualizado com sucesso! ");
+                        System.out.println("Email atualizado com sucesso!");
                     } else {
-                        System.out.println("Usuario nao encontrado");
+                        System.out.println("Usuário não encontrado");
                     }
-                    break;
-
-                case 3:
+                }
+                case 3 -> {
                     System.out.println("Telefone atual: " + telefone);
-                    System.out.println("Informe o novo telefone ");
+                    System.out.print("Informe o novo telefone ");
                     String novoTelefone = entrada.nextLine();
-
                     if (SistemaTeatro.editarTelefone(cpf, novoTelefone)) {
-                        System.out.println("Telefone atualizado com sucesso! ");
+                        System.out.println("Telefone atualizado com sucesso!");
                     } else {
-                        System.out.println("Usuario nao encontrado ");
+                        System.out.println("Usuário não encontrado");
                     }
-
-                    break;
-                case 4:
-                    System.out.println("Senha atual " + senha);
-                    System.out.println("Informe a nova Senha ");
+                }
+                case 4 -> {
+                    System.out.println("Senha atual: " + senha);
+                    System.out.print("Informe a nova Senha ");
                     String novaSenha = entrada.nextLine();
-
                     if (SistemaTeatro.editarSenha(cpf, novaSenha)) {
-                        System.out.println("Senha atualizada com sucesso! ");
+                        System.out.println("Senha atualizada com sucesso!");
                     } else {
-                        System.out.println("Usuario nao encontrado");
+                        System.out.println("Usuário não encontrado");
                     }
-                    break;
-
-                case 5:
-                    System.out.println("Saindo...");
-                    break;
-
-                default:
-                    System.out.println("Numero invalido. ");
-                    break;
+                }
+                case 5 -> System.out.println("Saindo...");
+                default -> System.out.println("Número inválido.");
             }
-
-        } while (opcaoEditar!=5);
-        
-
+        } while (opcaoEditar != 5);
     }
 }

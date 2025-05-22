@@ -1,18 +1,26 @@
 package sistema;
 
 import usuario.InfoEnsaio;
+import util.PersistenceUtil;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Admpeca_funções {
     private static Scanner entrada = new Scanner(System.in);
-    private static List<InfoEnsaio> listaEnsaios = new ArrayList<>();
 
-    public static void opcaoAdmPeca(String nome, String email, String telefone, String cpf, String senha) {
+    // carrega do disco
+    private static List<InfoEnsaio> listaEnsaios =
+        PersistenceUtil.loadList("ensaio.ser");
+
+    public static void opcaoAdmPeca(String nome,
+                                    String email,
+                                    String telefone,
+                                    String cpf,
+                                    String senha) {
         int opcao;
         do {
             System.out.println("\n===== Gerenciamento de Ensaios =====");
@@ -27,8 +35,13 @@ public class Admpeca_funções {
                 case 1 -> cadastrarEnsaio();
                 case 2 -> listarEnsaios();
                 case 3 -> visualizarAgendaAtor();
-                case 4 -> editarPerfilAdmPeca(nome, email, telefone, cpf, senha);
-                case 5 -> System.out.println("Retornando ao menu principal...");
+                case 4 -> editarPerfilAdmPeca(
+                               nome, email, telefone, cpf, senha);
+                case 5 -> {
+                    PersistenceUtil.saveList(
+                        listaEnsaios, "ensaio.ser");
+                    System.out.println("Retornando ao menu principal...");
+                }
                 default -> System.out.println("Opção inválida.");
             }
         } while (opcao != 5);
@@ -56,13 +69,14 @@ public class Admpeca_funções {
 
             System.out.print("Quantos membros receberão este ensaio? ");
             int qtd = Integer.parseInt(entrada.nextLine());
-            List<String> membros = new ArrayList<>();
+            List<String> membros = new java.util.ArrayList<>();
             for (int i = 0; i < qtd; i++) {
                 System.out.print("E-mail do membro " + (i + 1) + ": ");
                 membros.add(entrada.nextLine().trim());
             }
 
-            listaEnsaios.add(new InfoEnsaio(data, hora, local, feedback, membros));
+            listaEnsaios.add(new InfoEnsaio(
+                data, hora, local, feedback, membros));
             System.out.println("Ensaio cadastrado com sucesso!");
         } catch (DateTimeParseException | NumberFormatException e) {
             System.out.println("Formato de data/hora inválido. Tente novamente.");
@@ -100,11 +114,16 @@ public class Admpeca_funções {
             }
         }
         if (!encontrou) {
-            System.out.println("Nenhum ensaio encontrado para este e-mail.");
+            System.out.println(
+                "Nenhum ensaio encontrado para este e-mail.");
         }
     }
 
-    private static void editarPerfilAdmPeca(String nome, String email, String telefone, String cpf, String senha) {
+    private static void editarPerfilAdmPeca(String nome,
+                                            String email,
+                                            String telefone,
+                                            String cpf,
+                                            String senha) {
         int opcaoEditar;
         do {
             System.out.println("\n===== Editar perfil =====");

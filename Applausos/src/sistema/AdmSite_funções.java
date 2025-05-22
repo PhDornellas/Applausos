@@ -1,23 +1,27 @@
 package sistema;
 
+import usuario.InfoPeca;
+import usuario.User;
+import util.PersistenceUtil;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.TextStyle;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.Set;
-import java.util.TreeSet;
-import usuario.InfoPeca;
-import usuario.User;
+import java.util.*;
 
 public class AdmSite_funções {
     private static Scanner ENTRADA = new Scanner(System.in);
+
     private static InfoPeca[] listaPeca = new InfoPeca[10];
     private static int indice = 0;
+    static {
+        List<InfoPeca> temp = PersistenceUtil.loadList("peca.ser");
+        for (int i = 0; i < temp.size() && i < listaPeca.length; i++) {
+            listaPeca[i] = temp.get(i);
+        }
+        indice = Math.min(temp.size(), listaPeca.length);
+    }
 
     public static void opcaoAdmSite(List<User> usuarios) {
         int opcao;
@@ -28,7 +32,7 @@ public class AdmSite_funções {
             System.out.println("3. Editar peça");
             System.out.println("4. Deletar peça");
             System.out.println("5. Ver vendas de ingressos");
-            System.out.println("6. Deletar usuarios");
+            System.out.println("6. Deletar usuários");
             System.out.println("7. Sair");
             System.out.print("Escolha uma opção: ");
             opcao = ENTRADA.nextInt();
@@ -39,7 +43,14 @@ public class AdmSite_funções {
                 case 4 -> deletarPeca();
                 case 5 -> visualizarVendas();
                 case 6 -> deletarUsuario(usuarios);
-                case 7 -> System.out.println("Encerrando o sistema");
+                case 7 -> {
+                    // Salva o estado atual das peças antes de sair
+                    PersistenceUtil.saveList(
+                        Arrays.asList(listaPeca).subList(0, indice),
+                        "peca.ser"
+                    );
+                    System.out.println("Encerrando o sistema");
+                }
                 default -> System.out.println("Opção inválida");
             }
         } while (opcao != 7);
@@ -52,7 +63,7 @@ public class AdmSite_funções {
         }
         exibirCalendarioDatasCadastradas();
         System.out.println("==== CADASTRANDO PEÇA ====");
-        ENTRADA.nextLine();
+        ENTRADA.nextLine();  // consume newline
         System.out.print("Nome: ");
         String nome = ENTRADA.nextLine();
         System.out.print("Dia: ");
@@ -66,6 +77,7 @@ public class AdmSite_funções {
         ENTRADA.nextLine();
         System.out.print("Local: ");
         String local = ENTRADA.nextLine();
+
         listaPeca[indice++] = new InfoPeca(nome, dia, mes, ano, valor, local);
         System.out.println("Peça cadastrada com sucesso!");
     }
@@ -177,7 +189,8 @@ public class AdmSite_funções {
         for (Map.Entry<YearMonth, Set<Integer>> entry : ocupadas.entrySet()) {
             YearMonth ym = entry.getKey();
             Set<Integer> dias = entry.getValue();
-            System.out.println("── " + ym.getMonth().getDisplayName(TextStyle.FULL, pt) + " " + ym.getYear() + " ──");
+            System.out.println("── " + ym.getMonth().getDisplayName(TextStyle.FULL, pt)
+                               + " " + ym.getYear() + " ──");
             for (DayOfWeek dow : DayOfWeek.values()) {
                 System.out.printf("%4s", dow.getDisplayName(TextStyle.SHORT, pt));
             }
@@ -199,40 +212,35 @@ public class AdmSite_funções {
     }
 
     private static void listarUsuarios(List<User> usuarios) {
-    System.out.println("\n===== Usuários Cadastrados =====");
-    if (usuarios.isEmpty()) {
-        System.out.println("Nenhum usuário cadastrado.");
-    } else {
-        for (User u : usuarios) {
-            System.out.println("Nome: " + u.getNome() +
-                    " | CPF: " + u.getCpf() +
-                    " | Tipo: " + u.getTipo());
+        System.out.println("\n===== Usuários Cadastrados =====");
+        if (usuarios.isEmpty()) {
+            System.out.println("Nenhum usuário cadastrado.");
+        } else {
+            for (User u : usuarios) {
+                System.out.println("Nome: " + u.getNome()
+                    + " | CPF: " + u.getCpf()
+                    + " | Tipo: " + u.getTipo());
+            }
         }
     }
-}
 
-
-private static void deletarUsuario(List<User> usuarios) {
-    listarUsuarios(usuarios);
-    if (usuarios.isEmpty()) return;
-    ENTRADA.nextLine();
-    
-    System.out.print("\nDigite o CPF do usuário que deseja deletar: ");
-    String cpf = ENTRADA.nextLine();
-
-    User user = usuarios.stream()
-                        .filter(u -> u.getCpf().equalsIgnoreCase(cpf))
-                        .findFirst()
-                        .orElse(null);
-
-    if (user == null) {
-        System.out.println("Usuário não encontrado.");
-    } else {
-        usuarios.remove(user);
-        System.out.println("Usuário removido com sucesso.");
+    private static void deletarUsuario(List<User> usuarios) {
+        listarUsuarios(usuarios);
+        if (usuarios.isEmpty()) return;
+        ENTRADA.nextLine();
+        System.out.print("\nDigite o CPF do usuário que deseja deletar: ");
+        String cpf = ENTRADA.nextLine();
+        User user = usuarios.stream()
+                            .filter(u -> u.getCpf().equalsIgnoreCase(cpf))
+                            .findFirst()
+                            .orElse(null);
+        if (user == null) {
+            System.out.println("Usuário não encontrado.");
+        } else {
+            usuarios.remove(user);
+            System.out.println("Usuário removido com sucesso.");
+        }
     }
-}
-
 
     public static InfoPeca[] getListaPeca() {
         return listaPeca;
