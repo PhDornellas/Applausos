@@ -1,9 +1,8 @@
 package app;
 
 import sistema.SistemaTeatro;
-import sistema.Admpeca_funções;
-import sistema.AdmSite_funções;
 import util.PersistenceUtil;
+import service.*;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -15,16 +14,16 @@ public class App {
 
     
         PersistenceUtil.saveList(
-            SistemaTeatro.usuarios,
+            TipoUsuarioserver.getUsuarios(),
             "usuarios.ser"
         );
         PersistenceUtil.saveList(
-            Admpeca_funções.getListaEnsaios(),
+            EnsaioService.getListaEnsaios(),
             "ensaio.ser"
         );
         PersistenceUtil.saveList(
-            Arrays.stream(AdmSite_funções.getListaPeca())
-                  .limit(AdmSite_funções.getTotalPecas())
+            Arrays.stream(PecaService.getListaPeca())
+                  .limit(PecaService.getTotalPecas())
                   .collect(Collectors.toList()),
             "peca.ser"
         );
