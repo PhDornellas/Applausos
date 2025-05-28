@@ -66,6 +66,9 @@ https://docs.google.com/document/d/1MfPmWUnPtXLAXufXZfkr2rMlYaFxvca_1mQkzP2JrzA/
 ### YT ScreenCast codigo (POO)
 https://youtu.be/KDGKRite4qI
 
+### YT ScreenCast codigo parte 02 (POO)
+https://youtu.be/6Apx42Xv1gA
+
 
 
 
