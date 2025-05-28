@@ -12,12 +12,7 @@ public abstract class User implements Serializable {
     protected String senha;
     protected UserType tipo;
 
-    public User(String nome,
-                String email,
-                String telefone,
-                String cpf,
-                String senha,
-                UserType tipo) {
+    public User(String nome, String email, String telefone, String cpf, String senha, UserType tipo) {
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
@@ -26,15 +21,49 @@ public abstract class User implements Serializable {
         this.tipo = tipo;
     }
 
-    public String getNome()     { return nome; }
-    public String getEmail()    { return email; }
-    public String getTelefone() { return telefone; }
-    public String getCpf()      { return cpf; }
-    public String getSenha()    { return senha; }
-    public UserType getTipo()   { return tipo; }
+    // Getters
+    public String getNome() {
+        return nome;
+    }
 
-    public void setNome(String nome)         { this.nome = nome; }
-    public void setEmail(String email)       { this.email = email; }
-    public void setTelefone(String telefone) { this.telefone = telefone; }
-    public void setSenha(String senha)       { this.senha = senha; }
+    public String getEmail() {
+        return email;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public UserType getTipo() {
+        return tipo;
+    }
+
+    // Setters
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public void setTipo(UserType tipo) {
+        this.tipo = tipo;
+    }
 }

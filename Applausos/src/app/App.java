@@ -2,7 +2,7 @@ package app;
 
 import sistema.SistemaTeatro;
 import sistema.Admpeca_funções;
-import sistema.AdmSite_funções;
+import sistema.AdmSiteFuncoes;
 import util.PersistenceUtil;
 
 import java.util.Arrays;
@@ -23,8 +23,8 @@ public class App {
             "ensaio.ser"
         );
         PersistenceUtil.saveList(
-            Arrays.stream(AdmSite_funções.getListaPeca())
-                  .limit(AdmSite_funções.getTotalPecas())
+            Arrays.stream(AdmSiteFuncoes.getListaPeca())
+                  .limit(AdmSiteFuncoes.getTotalPecas())
                   .collect(Collectors.toList()),
             "peca.ser"
         );
