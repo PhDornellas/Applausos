@@ -17,7 +17,6 @@ public class InfoPeca implements Serializable {
     private static final int CAPACIDADE = 100;
     private List<InfoAvaliacao> avaliacoes = new ArrayList<>();
 
-    // Construtor com data separada
     public InfoPeca(String nomePeca, int dia, int mes, int ano, double valor, String local) {
         this.nomePeca = nomePeca;
         this.data = LocalDate.of(ano, mes, dia);
@@ -26,7 +25,6 @@ public class InfoPeca implements Serializable {
         this.ingressosVendidos = 0;
     }
 
-    // Construtor com LocalDate diretamente (útil para testes)
     public InfoPeca(String nomePeca, LocalDate data, double valor, String local) {
         this.nomePeca = nomePeca;
         this.data = data;

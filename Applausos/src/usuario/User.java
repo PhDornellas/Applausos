@@ -21,7 +21,7 @@ public abstract class User implements Serializable {
         this.tipo = tipo;
     }
 
-    // Getters
+   
     public String getNome() {
         return nome;
     }
@@ -46,7 +46,6 @@ public abstract class User implements Serializable {
         return tipo;
     }
 
-    // Setters
     public void setNome(String nome) {
         this.nome = nome;
     }

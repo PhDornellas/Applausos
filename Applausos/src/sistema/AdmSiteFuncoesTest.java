@@ -16,14 +16,12 @@ import java.util.Scanner;
 
 public class AdmSiteFuncoesTest {
 
-    // Classe concreta mínima para instanciar User (User é abstrato)
     static class UsuarioTeste extends User {
         public UsuarioTeste(String nome, String email, String telefone, String cpf, String senha, UserType tipo) {
             super(nome, email, telefone, cpf, senha, tipo);
         }
     }
 
-    // Teste simples de acesso e armazenamento direto no array
     @Test
     public void testCadastrarPecaSimulada() {
         InfoPeca peca = new InfoPeca("Peça Teste", LocalDate.of(2025, 6, 10), 100.0, "Teatro Central");
@@ -36,7 +34,6 @@ public class AdmSiteFuncoesTest {
         assertEquals(LocalDate.of(2025, 6, 10), recuperada.getData());
     }
 
-    // Testa se uma peça pode ser inserida em outra posição e recuperada
     @Test
     public void testTotalPecasSimulado() {
         InfoPeca peca = new InfoPeca("Peça Extra", LocalDate.of(2025, 7, 1), 150.0, "Teatro Norte");
@@ -45,7 +42,6 @@ public class AdmSiteFuncoesTest {
         assertNotNull(AdmSiteFuncoes.getListaPeca()[1]);
     }
 
-    // Testa método que imprime usuários (sem erros)
     @Test
     public void testOpcaoAdmSite() {
         List<User> usuarios = new ArrayList<>();
@@ -55,24 +51,19 @@ public class AdmSiteFuncoesTest {
         assertDoesNotThrow(() -> AdmSiteFuncoes.opcaoAdmSite(usuarios));
     }
 
-    // Teste completo do método cadastrarPeca simulando entrada padrão
     @Test
     public void testCadastrarPeca() {
-        // Resetar o índice e lista para estado inicial
+
         AdmSiteFuncoes.getListaPeca()[0] = null;
         resetIndiceAdmSite();
 
-        // Simula entrada padrão com locale US (ponto decimal)
         String input = "Hamlet\n25\n12\n2025\n150.0\nTeatro Municipal\n";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
 
-        // Recria Scanner com locale US após alterar System.in
         AdmSiteFuncoes.ENTRADA = new Scanner(System.in).useLocale(Locale.US);
 
-        // Executa o método que depende do Scanner
         AdmSiteFuncoes.cadastrarPeca();
 
-        // Verificações
         InfoPeca[] lista = AdmSiteFuncoes.getListaPeca();
         int total = AdmSiteFuncoes.getTotalPecas();
 
@@ -83,12 +74,11 @@ public class AdmSiteFuncoesTest {
         assertEquals("Teatro Municipal", lista[0].getLocal());
     }
 
-    // Método auxiliar para resetar o índice privado da classe AdmSiteFuncoes
     private void resetIndiceAdmSite() {
         try {
             java.lang.reflect.Field field = AdmSiteFuncoes.class.getDeclaredField("indice");
             field.setAccessible(true);
-            field.setInt(null, 0); // como é static, o objeto é null
+            field.setInt(null, 0);
         } catch (Exception e) {
             throw new RuntimeException("Falha ao resetar índice de AdmSiteFuncoes", e);
         }

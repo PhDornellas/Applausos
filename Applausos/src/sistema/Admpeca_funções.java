@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class Admpeca_funções {
     private static Scanner entrada = new Scanner(System.in);
 
-    // carrega do disco
+   
     private static List<InfoEnsaio> listaEnsaios =
         PersistenceUtil.loadList("ensaio.ser");
 
