@@ -70,6 +70,6 @@ public class EnsaioService {
 
     public static void salvarEnsaios() {
         PersistenceUtil.saveList(listaEnsaios, "ensaio.ser");
-        System.out.println("Retornando ao menu principal...");
+        System.out.println("De volta ao menu principal...");
     }
 }

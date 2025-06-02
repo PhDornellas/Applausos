@@ -3,6 +3,7 @@ package sistema;
 import service.AgendaService;
 import service.EnsaioService;
 import service.PerfilAdmService;
+import app.Utils;
 
 import java.util.Scanner;
 
@@ -26,11 +27,21 @@ public class Admpeca_funções {
             opcao = Integer.parseInt(entrada.nextLine());
 
             switch (opcao) {
-                case 1 -> EnsaioService.cadastrarEnsaio(entrada);
-                case 2 -> EnsaioService.listarEnsaios();
-                case 3 -> AgendaService.visualizarAgendaAtor(entrada);
-                case 4 -> PerfilAdmService.editarPerfilAdmPeca(entrada, nome, email, telefone, cpf, senha);
-                case 5 -> EnsaioService.salvarEnsaios();
+                case 1 -> {
+                    app.Utils.clearScreen();
+                    EnsaioService.cadastrarEnsaio(entrada);}
+                case 2 -> {
+                    app.Utils.clearScreen();
+                    EnsaioService.listarEnsaios();}
+                case 3 -> {
+                    app.Utils.clearScreen();
+                    AgendaService.visualizarAgendaAtor(entrada);}
+                case 4 -> {
+                    app.Utils.clearScreen();
+                    PerfilAdmService.editarPerfilAdmPeca(entrada, nome, email, telefone, cpf, senha);}
+                case 5 -> {
+                    app.Utils.clearScreen();
+                    EnsaioService.salvarEnsaios();}
                 default -> System.out.println("Opção inválida.");
             }
         } while (opcao != 5);

@@ -1,6 +1,7 @@
 package service;
 
 import java.util.Scanner;
+import app.Utils;
 
 public class PerfilAdmService {
 
@@ -23,6 +24,7 @@ public class PerfilAdmService {
 
             switch (opcaoEditar) {
                 case 1 -> {
+                    app.Utils.clearScreen();
                     System.out.println("Nome atual: " + nome);
                     System.out.print("Novo nome: ");
                     String novoNome = entrada.nextLine();
@@ -32,6 +34,7 @@ public class PerfilAdmService {
                         System.out.println("Usuário não encontrado.");
                 }
                 case 2 -> {
+                    app.Utils.clearScreen();
                     System.out.println("Email atual: " + email);
                     System.out.print("Novo email: ");
                     String novoEmail = entrada.nextLine();
@@ -41,6 +44,7 @@ public class PerfilAdmService {
                         System.out.println("Usuário não encontrado.");
                 }
                 case 3 -> {
+                    app.Utils.clearScreen();
                     System.out.println("Telefone atual: " + telefone);
                     System.out.print("Novo telefone: ");
                     String novoTelefone = entrada.nextLine();
@@ -50,6 +54,7 @@ public class PerfilAdmService {
                         System.out.println("Usuário não encontrado.");
                 }
                 case 4 -> {
+                    app.Utils.clearScreen();
                     System.out.println("Senha atual: " + senha);
                     System.out.print("Nova senha: ");
                     String novaSenha = entrada.nextLine();

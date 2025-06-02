@@ -18,6 +18,7 @@ public class PerfilService {
 
             switch (opcaoEditar) {
                 case 1 -> {
+                    app.Utils.clearScreen();
                     System.out.println("Nome atual: " + nome);
                     System.out.print("Informe o novo nome: ");
                     String novoNome = entrada.nextLine();
@@ -28,6 +29,7 @@ public class PerfilService {
                     }
                 }
                 case 2 -> {
+                    app.Utils.clearScreen();
                     System.out.println("Email atual: " + email);
                     System.out.print("Informe o novo Email: ");
                     String novoEmail = entrada.nextLine();
@@ -38,6 +40,7 @@ public class PerfilService {
                     }
                 }
                 case 3 -> {
+                    app.Utils.clearScreen();
                     System.out.println("Telefone atual: " + telefone);
                     System.out.print("Informe o novo telefone ");
                     String novoTelefone = entrada.nextLine();
@@ -48,6 +51,7 @@ public class PerfilService {
                     }
                 }
                 case 4 -> {
+                    app.Utils.clearScreen();
                     System.out.println("Senha atual: " + senha);
                     System.out.print("Informe a nova Senha ");
                     String novaSenha = entrada.nextLine();

@@ -3,6 +3,7 @@ package sistema;
 import service.PecaService;
 import service.UsuarioService;
 import usuario.User;
+import app.Utils;
 
 import java.util.List;
 import java.util.Scanner;
@@ -25,15 +26,27 @@ public class AdmSite_funções {
             opcao = ENTRADA.nextInt();
 
             switch (opcao) {
-                case 1 -> PecaService.cadastrarPeca(ENTRADA);
-                case 2 -> PecaService.listarPeca();
-                case 3 -> PecaService.editarPeca(ENTRADA);
-                case 4 -> PecaService.deletarPeca(ENTRADA);
-                case 5 -> PecaService.visualizarVendas();
-                case 6 -> UsuarioService.deletarUsuario(ENTRADA, usuarios);
+                case 1 -> {
+                    app.Utils.clearScreen();
+                    PecaService.cadastrarPeca(ENTRADA);}
+                case 2 -> {
+                    app.Utils.clearScreen();
+                    PecaService.listarPeca();}
+                case 3 -> {
+                    app.Utils.clearScreen();
+                    PecaService.editarPeca(ENTRADA);}
+                case 4 -> {
+                    app.Utils.clearScreen();
+                    PecaService.deletarPeca(ENTRADA);}
+                case 5 -> {
+                    app.Utils.clearScreen();
+                    PecaService.visualizarVendas();}
+                case 6 -> {
+                    app.Utils.clearScreen();
+                    UsuarioService.deletarUsuario(ENTRADA, usuarios);}
                 case 7 -> {
-                    // PecaService.salvarPecas();
-                    System.out.println("Encerrando o sistema");
+                    app.Utils.clearScreen();
+                    System.out.println("De volta ao menu principal...");                  
                 }
                 default -> System.out.println("Opção inválida");
             }
