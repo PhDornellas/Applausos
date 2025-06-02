@@ -54,10 +54,7 @@ https://docs.google.com/document/d/1MfPmWUnPtXLAXufXZfkr2rMlYaFxvca_1mQkzP2JrzA/
 ### YT ScreeCast codigo (POO)
 https://youtu.be/ExI0kF_V69o
 
-# ENTREGA 4
 
-### Diagrama de Classes (POO)
-https://docs.google.com/document/d/1MfPmWUnPtXLAXufXZfkr2rMlYaFxvca_1mQkzP2JrzA/edit?usp=sharing
 
 ### YT ScreenCast codigo (POO)
 https://youtu.be/KDGKRite4qI
