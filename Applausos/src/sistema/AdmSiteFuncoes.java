@@ -13,14 +13,15 @@ public class AdmSiteFuncoes {
     private static int indice = 0;
 
     public static void cadastrarPeca() {
-
+        // Se tiver alguma quebra de linha no buffer, pode consumir com
+        // ENTRADA.nextLine()
         String nome = ENTRADA.nextLine();
         int dia = ENTRADA.nextInt();
         int mes = ENTRADA.nextInt();
         int ano = ENTRADA.nextInt();
         LocalDate data = LocalDate.of(ano, mes, dia);
         double valor = ENTRADA.nextDouble();
-        ENTRADA.nextLine();
+        ENTRADA.nextLine(); // consumir quebra de linha após nextDouble
         String local = ENTRADA.nextLine();
 
         lista[indice] = new InfoPeca(nome, data, valor, local);
