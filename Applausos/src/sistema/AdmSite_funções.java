@@ -32,7 +32,7 @@ public class AdmSite_funções {
                 case 5 -> PecaService.visualizarVendas();
                 case 6 -> UsuarioService.deletarUsuario(ENTRADA, usuarios);
                 case 7 -> {
-                    PecaService.salvarPecas();
+                    // PecaService.salvarPecas();
                     System.out.println("Encerrando o sistema");
                 }
                 default -> System.out.println("Opção inválida");
