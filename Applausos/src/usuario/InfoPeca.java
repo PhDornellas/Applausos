@@ -17,8 +17,10 @@ public class InfoPeca implements Serializable {
     private static final int CAPACIDADE = 100;
     private List<InfoAvaliacao> avaliacoes = new ArrayList<>();
 
-    // Construtor com data separada
-    public InfoPeca(String nomePeca, int dia, int mes, int ano, double valor, String local) {
+    public InfoPeca(String nomePeca,
+                    int dia, int mes, int ano,
+                    double valor,
+                    String local) {
         this.nomePeca = nomePeca;
         this.data = LocalDate.of(ano, mes, dia);
         this.valor = valor;
@@ -26,70 +28,30 @@ public class InfoPeca implements Serializable {
         this.ingressosVendidos = 0;
     }
 
-    // Construtor com LocalDate diretamente (útil para testes)
-    public InfoPeca(String nomePeca, LocalDate data, double valor, String local) {
-        this.nomePeca = nomePeca;
-        this.data = data;
-        this.valor = valor;
-        this.local = local;
-        this.ingressosVendidos = 0;
-    }
-
-    public String getNome() {
-        return nomePeca;
-    }
-
-    public void setNome(String nome) {
-        this.nomePeca = nome;
-    }
-
-    public LocalDate getData() {
-        return data;
-    }
-
-    public void setData(LocalDate data) {
-        this.data = data;
-    }
-
-    public String getDataFormatada() {
+    public String getNome()                     { return nomePeca; }
+    public void setNome(String nome)            { this.nomePeca = nome; }
+    public LocalDate getData()                  { return data; }
+    public String getDataFormatada()            {
         return data.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
-
-    public double getValor() {
-        return valor;
-    }
-
-    public void setValor(double valor) {
-        this.valor = valor;
-    }
-
-    public String getLocal() {
-        return local;
-    }
-
-    public void setLocal(String local) {
-        this.local = local;
-    }
-
-    public int getIngressosVendidos() {
-        return ingressosVendidos;
-    }
-
-    public int getIngressosRestantes() {
+    public void setData(LocalDate data)         { this.data = data; }
+    public double getValor()                    { return valor; }
+    public void setValor(double valor)          { this.valor = valor; }
+    public String getLocal()                    { return local; }
+    public void setLocal(String local)          { this.local = local; }
+    public int getIngressosVendidos()           { return ingressosVendidos; }
+    public int getIngressosRestantes()          {
         return CAPACIDADE - ingressosVendidos;
     }
-
-    public void incrementarIngressosVendidos() {
-        if (ingressosVendidos < CAPACIDADE) {
-            this.ingressosVendidos++;
-        }
+    public void incrementarIngressosVendidos()  {
+        this.ingressosVendidos++;
     }
 
-    public void adicionarAvaliacao(int estrelas, String comentario) {
+    public void adicionarAvaliacao(int estrelas,
+                                   String comentario) {
         this.avaliacoes.add(new InfoAvaliacao(estrelas, comentario));
     }
-
-    public List<InfoAvaliacao> getAvaliacoes() {
+    public List<InfoAvaliacao> getAvaliacoes()  {
         return avaliacoes;
     }
 }

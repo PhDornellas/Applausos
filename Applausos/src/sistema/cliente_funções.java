@@ -10,10 +10,10 @@ public class cliente_funções {
     private static Scanner entrada = new Scanner(System.in);
 
     public static void opcaoCliente(String nome,
-            String email,
-            String telefone,
-            String cpf,
-            String senha) {
+                                    String email,
+                                    String telefone,
+                                    String cpf,
+                                    String senha) {
         int opcao;
         do {
             System.out.println("\n===== Menu do Cliente =====");
@@ -33,9 +33,10 @@ public class cliente_funções {
                 case 5 -> {
                     // Salva o estado das peças antes de sair
                     PersistenceUtil.saveList(
-                            List.of(AdmSiteFuncoes.getListaPeca())
-                                    .subList(0, AdmSiteFuncoes.getTotalPecas()),
-                            "peca.ser");
+                        List.of(AdmSite_funções.getListaPeca())
+                            .subList(0, AdmSite_funções.getTotalPecas()),
+                        "peca.ser"
+                    );
                     System.out.println("Encerrando o sistema do cliente.");
                 }
                 default -> System.out.println("Opção inválida!");
@@ -44,8 +45,8 @@ public class cliente_funções {
     }
 
     private static void visualizarPecas(boolean meia) {
-        InfoPeca[] lista = AdmSiteFuncoes.getListaPeca();
-        int total = AdmSiteFuncoes.getTotalPecas();
+        InfoPeca[] lista = AdmSite_funções.getListaPeca();
+        int total = AdmSite_funções.getTotalPecas();
         System.out.println("==== Peças Disponíveis ====");
         if (total == 0) {
             System.out.println("Nenhuma peça disponível.");
@@ -54,19 +55,19 @@ public class cliente_funções {
                 InfoPeca p = lista[i];
                 double valor = meia ? p.getValor() / 2 : p.getValor();
                 System.out.println("Peça " + (i + 1) + ": "
-                        + p.getNome()
-                        + " | Data: " + p.getDataFormatada()
-                        + " | Valor: R$" + valor
-                        + " | Local: " + p.getLocal()
-                        + " | Vendidos: " + p.getIngressosVendidos()
-                        + " | Restantes: " + p.getIngressosRestantes());
+                    + p.getNome()
+                    + " | Data: " + p.getDataFormatada()
+                    + " | Valor: R$" + valor
+                    + " | Local: " + p.getLocal()
+                    + " | Vendidos: " + p.getIngressosVendidos()
+                    + " | Restantes: " + p.getIngressosRestantes());
             }
         }
     }
 
     private static void comprarPeca() {
-        InfoPeca[] lista = AdmSiteFuncoes.getListaPeca();
-        int total = AdmSiteFuncoes.getTotalPecas();
+        InfoPeca[] lista = AdmSite_funções.getListaPeca();
+        int total = AdmSite_funções.getTotalPecas();
         if (total == 0) {
             System.out.println("Nenhuma peça disponível para compra.");
             return;
@@ -93,8 +94,8 @@ public class cliente_funções {
     }
 
     private static void avaliarPeca() {
-        InfoPeca[] lista = AdmSiteFuncoes.getListaPeca();
-        int total = AdmSiteFuncoes.getTotalPecas();
+        InfoPeca[] lista = AdmSite_funções.getListaPeca();
+        int total = AdmSite_funções.getTotalPecas();
         if (total == 0) {
             System.out.println("Nenhuma peça cadastrada.");
             return;
@@ -126,10 +127,10 @@ public class cliente_funções {
     }
 
     private static void editarPerfilCliente(String nome,
-            String email,
-            String telefone,
-            String cpf,
-            String senha) {
+                                            String email,
+                                            String telefone,
+                                            String cpf,
+                                            String senha) {
         int opcaoEditar;
         do {
             System.out.println("\n===== Editar perfil =====");

@@ -11,7 +11,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class SistemaTeatro {
-    public static List<User> usuarios = PersistenceUtil.loadList("usuarios.ser");
+    public static List<User> usuarios =
+        PersistenceUtil.loadList("usuarios.ser");
 
     public static void executar() {
         Scanner entrada = new Scanner(System.in);
@@ -93,30 +94,33 @@ public class SistemaTeatro {
             if (usuario.getSenha().equals(senha)) {
                 System.out.println("\nLogin realizado com sucesso!");
                 System.out.println("Bem-vindo, " + usuario.getNome() +
-                        " (" + usuario.getTipo() + ")!");
+                                   " (" + usuario.getTipo() + ")!");
                 if (usuario instanceof InfoAdministradorSite) {
-                    AdmSiteFuncoes.opcaoAdmSite(usuarios);
+                    AdmSite_funções.opcaoAdmSite(usuarios);
                 } else if (usuario instanceof InfoCliente) {
                     cliente_funções.opcaoCliente(
-                            usuario.getNome(),
-                            usuario.getEmail(),
-                            usuario.getTelefone(),
-                            usuario.getCpf(),
-                            usuario.getSenha());
+                        usuario.getNome(),
+                        usuario.getEmail(),
+                        usuario.getTelefone(),
+                        usuario.getCpf(),
+                        usuario.getSenha()
+                    );
                 } else if (usuario instanceof InfoAdministradorPeca) {
                     Admpeca_funções.opcaoAdmPeca(
-                            usuario.getNome(),
-                            usuario.getEmail(),
-                            usuario.getTelefone(),
-                            usuario.getCpf(),
-                            usuario.getSenha());
+                        usuario.getNome(),
+                        usuario.getEmail(),
+                        usuario.getTelefone(),
+                        usuario.getCpf(),
+                        usuario.getSenha()
+                    );
                 } else if (usuario instanceof InfoMembroElenco) {
                     Membroelenco_funções.opcaoMembroElenco(
-                            usuario.getNome(),
-                            usuario.getEmail(),
-                            usuario.getTelefone(),
-                            usuario.getCpf(),
-                            usuario.getSenha());
+                        usuario.getNome(),
+                        usuario.getEmail(),
+                        usuario.getTelefone(),
+                        usuario.getCpf(),
+                        usuario.getSenha()
+                    );
                 }
                 return;
             }
@@ -125,8 +129,7 @@ public class SistemaTeatro {
             System.out.println("2. Recuperar senha");
             System.out.print("Escolha uma opção: ");
             int escolha = lerInteiro(scanner);
-            if (escolha == 1)
-                continue;
+            if (escolha == 1) continue;
             else if (escolha == 2) {
                 System.out.print("Digite o e-mail para recuperação: ");
                 String emailRec = scanner.nextLine();
@@ -146,17 +149,17 @@ public class SistemaTeatro {
         } else {
             for (User u : usuarios) {
                 System.out.println("Nome: " + u.getNome() +
-                        " | CPF: " + u.getCpf() +
-                        " | Tipo: " + u.getTipo());
+                                   " | CPF: " + u.getCpf() +
+                                   " | Tipo: " + u.getTipo());
             }
         }
     }
 
     private static User buscarUsuarioPorCpf(String cpf) {
         return usuarios.stream()
-                .filter(u -> u.getCpf().equalsIgnoreCase(cpf))
-                .findFirst()
-                .orElse(null);
+                       .filter(u -> u.getCpf().equalsIgnoreCase(cpf))
+                       .findFirst()
+                       .orElse(null);
     }
 
     private static int lerInteiro(Scanner scanner) {
@@ -177,7 +180,6 @@ public class SistemaTeatro {
         }
         return false;
     }
-
     public static boolean editarEmail(String cpf, String novoEmail) {
         User usuario = buscarUsuarioPorCpf(cpf);
         if (usuario != null) {
@@ -186,7 +188,6 @@ public class SistemaTeatro {
         }
         return false;
     }
-
     public static boolean editarTelefone(String cpf, String novoTelefone) {
         User usuario = buscarUsuarioPorCpf(cpf);
         if (usuario != null) {
@@ -195,7 +196,6 @@ public class SistemaTeatro {
         }
         return false;
     }
-
     public static boolean editarSenha(String cpf, String novaSenha) {
         User usuario = buscarUsuarioPorCpf(cpf);
         if (usuario != null) {
