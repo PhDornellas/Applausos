@@ -2,8 +2,8 @@ package service;
 
 import java.util.Scanner;
 
-public class PerfilService {
-    public static void editarPerfilCliente(String nome, String email, String telefone, String cpf, String senha, Scanner entrada) {
+public class EditarPerfilService {
+    public static void editarPerfil(String nome, String email, String telefone, String cpf, String senha, Scanner entrada) {
         int opcaoEditar;
         do {
             System.out.println("\n===== Editar perfil =====");

@@ -1,7 +1,7 @@
 package sistema;
 
-import service.PerfilMembroService;
-import service.VisualizacaoService;
+import service.*;
+// import service.PerfilMembroService;
 
 import java.util.Scanner;
 
@@ -24,7 +24,7 @@ public class Membroelenco_funções {
                     VisualizacaoService.visualizarEnsaios(email);}
                 case 2 -> {
                     app.Utils.clearScreen();
-                    PerfilMembroService.editarPerfilMembro(entrada, nome, email, telefone, cpf, senha);}
+                    EditarPerfilService.editarPerfil(nome, email, telefone, cpf, senha, entrada);}
                 case 3 -> {
                     app.Utils.clearScreen();
                     System.out.println("De volta ao menu principal...");}

@@ -2,7 +2,6 @@ package sistema;
 
 import service.*;
 import java.util.Scanner;
-import app.Utils;
 
 public class cliente_funções {
     private static Scanner entrada = new Scanner(System.in);
@@ -32,7 +31,7 @@ public class cliente_funções {
                     AvaliacaoService.avaliarPeca(entrada);}
                 case 4 -> {
                     app.Utils.clearScreen();
-                    PerfilService.editarPerfilCliente(nome, email, telefone, cpf, senha, entrada);}
+                    EditarPerfilService.editarPerfil(nome, email, telefone, cpf, senha, entrada);}
                 case 5 -> {
                     app.Utils.clearScreen();
                     System.out.println("De volta ao menu principal...");}

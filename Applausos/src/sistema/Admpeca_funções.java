@@ -1,10 +1,7 @@
 package sistema;
 
-import service.AgendaService;
-import service.EnsaioService;
-import service.PerfilAdmService;
-import app.Utils;
-
+import service.*;
+// import service.PerfilAdmService;
 import java.util.Scanner;
 
 public class Admpeca_funções {
@@ -38,7 +35,7 @@ public class Admpeca_funções {
                     AgendaService.visualizarAgendaAtor(entrada);}
                 case 4 -> {
                     app.Utils.clearScreen();
-                    PerfilAdmService.editarPerfilAdmPeca(entrada, nome, email, telefone, cpf, senha);}
+                    EditarPerfilService.editarPerfil(nome, email, telefone, cpf, senha, entrada);}
                 case 5 -> {
                     app.Utils.clearScreen();
                     EnsaioService.salvarEnsaios();}

@@ -3,7 +3,6 @@ package sistema;
 import service.PecaService;
 import service.UsuarioService;
 import usuario.User;
-import app.Utils;
 
 import java.util.List;
 import java.util.Scanner;
